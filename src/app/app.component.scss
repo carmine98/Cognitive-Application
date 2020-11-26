@@ -3,8 +3,8 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-image: url("../../images/background.png");
-  background-position: 10% 57%;
+  background-image: url("../../images/light-bulb-1246043.jpg");
+  background-position: center;
   position: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -15,27 +15,24 @@
 .title {
   text-align: left;
   color: white;
-  font-size: 80px;
+  font-size: 60px;
   position: absolute;
   top: 40%;
   left: 5%;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Courier";
 }
 
 .play_button {
   position: absolute;
-  top: 55%;
-  left: 18%;
+  top: 50%;
+  left: 20%;
   transition: .5s ease;
   font-size: 30px;
-  font-family: "Times New Roman", Times, serif;
 }
 
 .mat-icon {
-  vertical-align: middle;
-  margin-left: -3px;
-  padding-bottom: 8px;
-  font-size: 28px;
+  font-size: 200%;
+  color: white;
 }
 
 
