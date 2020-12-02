@@ -13,8 +13,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
-import { CognitiveTestComponent } from './cognitive-test/cognitive-test.component';
+import { CognitiveTestComponent } from './BTACT-wordListRecall/cognitive-test.component';
 import {FormsModule} from '@angular/forms';
+import { ExplainBTACTComponent } from './explain-btact/explain-btact.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA0qW5UNzOdLzK9JaqsuYDH1ny0g7tXgKA',
@@ -36,6 +37,7 @@ const firebaseConfig = {
     LoginComponent,
     HomeComponent,
     CognitiveTestComponent,
+    ExplainBTACTComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,6 @@ const firebaseConfig = {
     AngularFirestoreModule, // firestore
     AngularFireStorageModule,
     FormsModule,
-    // storage
   ],
   providers: [],
   bootstrap: [AppComponent]
