@@ -28,8 +28,9 @@ export class LoginComponent implements OnInit {
       id: '',
       surname: '',
       name: '',
-      age: '',
-      genre: ''
+      age: null,
+      genre: '',
+      testID: ''
     };
   }
 

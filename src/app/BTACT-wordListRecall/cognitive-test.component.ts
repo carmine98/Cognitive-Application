@@ -68,6 +68,7 @@ export class CognitiveTestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.startRecording();
   }
 
 }

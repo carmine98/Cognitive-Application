@@ -15,5 +15,6 @@
     Please do not refresh/reload the page after the recording has begun.
   </p>
   <br>
-  <button mat-raised-button routerLink="../btact" routerLinkActive="acvtive">Ok</button>
+  <button mat-raised-button (click)="audio()">Play</button>
+  <button mat-raised-button routerLink="../btact" routerLinkActive="active" *ngIf="audioFinished">Next</button>
 </div>
