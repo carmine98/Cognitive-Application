@@ -12,8 +12,4 @@ export class UsersService {
 
   formData!: User;
 
-  getAllStudents() {
-    return this.fireStore.collection('utenti').snapshotChanges();
-  }
-
 }

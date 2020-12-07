@@ -1,47 +1,55 @@
-<h1 class="display-5 text-center">User Registration</h1>
-<div> </div>
+<div class="background">
+  <h1 class="login-title">Introduce Yourself!</h1>
 
-<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
-  <div class="form-group">
-    <input name="surName" #surName="ngModel" [(ngModel)]="service.formData.surname" class="form-control"
-           placeholder="Surname" required>
-    <div *ngIf="surName.invalid && surName.touched" class="validation-error">Surname is required.</div>
+  <div class="container">
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+      <div class="form-group">
+        <input type="text" name="surName" #surName="ngModel" [(ngModel)]="service.formData.surname" class="box"
+               placeholder="Surname" required>
+        <div *ngIf="surName.invalid && surName.touched" class="validation-error">Surname is required.</div>
+      </div>
+      <br>
+      <div class="form-group">
+        <input type="text" name="Name" #Name="ngModel" [(ngModel)]="service.formData.name" class="box"
+               placeholder="Name" required>
+        <div *ngIf="Name.invalid && Name.touched" class="validation-error">Name is required.</div>
+      </div>
+      <br>
+      <div class="form-group">
+        <input type="number" name="age" #Age="ngModel" [(ngModel)]="service.formData.age" class="box"
+               placeholder="Age" min="0" step="1" oninput="validity.valid||(value='');" required>
+        <div *ngIf="Age.invalid && Age.touched" class="validation-error">Age is required.</div>
+      </div>
+      <br>
+      <div class="form-group">
+        <input list="genre" name="genre" #Genre="ngModel" [(ngModel)]="service.formData.genre" class="box"
+               placeholder="Genre" pattern="^(Male|Female|Not Binary)$" oninput="validity.valid||(value='');" required>
+        <datalist id="genre">
+          <option name="Male">Male</option>
+          <option name="Female">Female</option>
+          <option name="Not Binary">Not Binary</option>
+        </datalist>
+        <div *ngIf="Genre.invalid && Genre.touched" class="validation-error">Genre is required.</div>
+      </div>
+      <br>
+      <div class="form-group">
+        <input name="testID" #testID="ngModel" [(ngModel)]="service.formData.testID" class="box"
+               placeholder="Test id" required>
+        <div *ngIf="testID.invalid && testID.touched" class="validation-error">Age is required.</div>
+      </div>
+        <br>
+        <div>
+          <button color="primary" mat-raised-button type="submit" [disabled]="form.invalid"
+                  class="btn btn-lg btn-block btn btn-outline-success">Submit</button>&nbsp;
+          <button color="primary" mat-raised-button [disabled]="!startTest" routerLink="../explain-btact"
+                  routerLinkActive="acvtive">Start test</button>
+        </div>
+      <br>
+    </form>
   </div>
-  <div class="form-group">
-    <input name="Name" #Name="ngModel" [(ngModel)]="service.formData.name" class="form-control"
-           placeholder="Full name" required>
-    <div *ngIf="Name.invalid && Name.touched" class="validation-error">User name is required.</div>
-  </div>
-  <div class="form-group">
-    <input type="number" name="age" #Age="ngModel" [(ngModel)]="service.formData.age" class="form-control"
-           placeholder="Age" required>
-    <div *ngIf="Age.invalid && Age.touched" class="validation-error">Age is required.</div>
-  </div>
-  <div class="form-group">
-    <input list="genre" name="genre" #Genre="ngModel" [(ngModel)]="service.formData.genre" class="form-control"
-           placeholder="Genre" required>
-    <datalist id="genre">
-      <option value="Male">
-      <option value="Female">
-      <option value="Not Binary">
-    </datalist>
-    <div *ngIf="Genre.invalid && Genre.touched" class="validation-error">Genre is required.</div>
-  </div>
-  <div class="form-group">
-    <input name="testID" #testID="ngModel" [(ngModel)]="service.formData.testID" class="form-control"
-           placeholder="Test id" required>
-    <div *ngIf="testID.invalid && testID.touched" class="validation-error">Age is required.</div>
-  </div>
-  <div class="form-group">
-    <button type="submit" [disabled]="form.invalid"
-            class="btn btn-lg btn-block btn btn-outline-success">Submit</button>
-  </div>
-</form>
-<div class="error" *ngIf="message">
-  <h5 class="text-success">{{ message }}</h5>
-  <button mat-raised-button routerLink="../explain-btact" routerLinkActive="acvtive">Start test</button>
 </div>
+
 
 
 

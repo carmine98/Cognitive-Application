@@ -1,13 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div style="text-align:center; padding-top: 15%">
   <h1>
-    Welcome to {{ title }}!
+    <button mat-raised-button *ngIf="isRecording">Now is recording</button>
+    <button mat-raised-button *ngIf="!isRecording">The record is finished!</button>
   </h1>
 </div>
-
-<div>
-  <button *ngIf="!isRecording" (click)="startRecording()">Start Recording</button>
-  <button *ngIf="isRecording" (click)="stopRecording()">Stop Recording</button>
+<br>
+<div style="text-align: center">
+  <p style="text-align: center; font-size: large; color: red">
+    Please do not refresh/reload the page after the recording has begun.
+  </p>
+  <br>
+  <button mat-raised-button [disabled]="!isRecording" (click)="openDialog()">Stop</button>&nbsp;&nbsp;
+  <button mat-raised-button [disabled]="isRecording">Next</button>
 </div>
 
 <div *ngFor="let url of urls">

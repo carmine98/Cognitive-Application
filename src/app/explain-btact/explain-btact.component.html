@@ -1,20 +1,18 @@
 <div>
-  <p>
-    You are going to hear a list of 15 words. Listen carefully. When the list is finished, you are to repeat as
-    many of the words as you can remember. It doesn't matter in what order you repeat them. Just try to
-    remember as many as you can. You will hear each word only one time. You will have up to one and a half
-    minutes (90 seconds)
-    Please press "Play" below to hear the audio. When the audio has finished, click the "Next" button to
-    proceed to the next page where the recording for your responses will begin after 1 second.
-    We suggest that you close your eyes while you are listening to the audio to help you concentrate.
-    NOTE: On the pages where your audio response is being recorded, the page will automatically progress
-    after the allotted time has finished.
+  <p class="explain-text">
+    <br>
+    You are going to hear a list of 15 words. Listen carefully. When the list is finished, you are to repeat as many of the words as you can remember. It doesn't matter in what order you repeat them. Just try to remember as many as you can. You will hear each word only one time. You will have up to one and a half minutes (90 seconds).
+    <br><br>
+    Please press "Play" below to hear the audio. When the audio has finished, click the "Next" button to proceed to the next page where the recording for your responses will begin after 1 second.
+    <br><br>
+    Please do not use a paper and pencil or other instruments. We suggest that you close your eyes while you are listening to the audio to help you concentrate. NOTE: On the pages where your audio response is being recorded, the page will automatically progress after the allotted time has finished.
   </p>
   <br>
-  <p>
+  <br>
+  <button mat-raised-button (click)="audio()">Play</button>&nbsp;&nbsp;
+  <button mat-raised-button routerLink="../btact" routerLinkActive="active" [disabled]="!audioFinished">Next</button>
+  <br><br>
+  <p style="text-align: center; font-size: large; color: red">
     Please do not refresh/reload the page after the recording has begun.
   </p>
-  <br>
-  <button mat-raised-button (click)="audio()">Play</button>
-  <button mat-raised-button routerLink="../btact" routerLinkActive="active" *ngIf="audioFinished">Next</button>
 </div>

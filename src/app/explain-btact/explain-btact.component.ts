@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import { AngularFireStorage } from '@angular/fire/storage';
-
-
-
 
 
 @Component({
@@ -17,6 +14,7 @@ export class ExplainBTACTComponent implements OnInit {
 
   constructor(private storage: AngularFireStorage) {
     this.audioFinished = false;
+
   }
 
   ngOnInit(): void {

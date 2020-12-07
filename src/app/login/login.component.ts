@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
+import firebase from 'firebase';
 import { NgForm } from '@angular/forms';
 import { UsersService } from '../user/users.service';
+
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +15,14 @@ import { UsersService } from '../user/users.service';
 export class LoginComponent implements OnInit {
 
   message!: string;
+  firestore = firebase.firestore();
+  startTest!: boolean;
+  testIdentifier!: string;
 
-  constructor(private db: AngularFirestore, public service: UsersService) { }
+
+  constructor(private db: AngularFirestore, public service: UsersService, private snackbar: MatSnackBar) {
+    this.startTest = false;
+  }
 
   ngOnInit(): void {
     this.resetForm();
@@ -39,9 +48,32 @@ export class LoginComponent implements OnInit {
     this.message = '';
     const userData = Object.assign({}, form.value);
     delete userData.id;
-    this.db.collection('utenti').add(userData);
-    this.message = 'information is successfully saved!';
-    this.resetForm(form);
+    sessionStorage.setItem('testIdentifier', userData.testID);
+    this.testIdentifier = userData.testID;
+    const config = new MatSnackBarConfig();
+    config.duration = 5000;
+    config.panelClass = ['background-red'];
+    this.firestore.collection('utenti')
+      .where('testID', '==', userData.testID)
+      .get()
+      .then((document) => {
+        // Display Retrieved Data To Console
+       if (document.empty){
+         this.db.collection('utenti').add(userData);
+         this.resetForm(form);
+         this.startTest = true;
+         this.message = 'Information is successfully saved!'
+         this.snackbar.open(this.message, undefined, config);
+       } else {
+         this.startTest = false;
+         this.message = 'User has already done the text';
+         this.resetForm(form);
+         this.snackbar.open(this.message, undefined, config);
+        }
+      })
+      .catch((error) => {
+        console.log(`Error getting documents: ${error}`);
+      });
   }
 
 }

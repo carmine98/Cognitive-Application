@@ -17,6 +17,13 @@ import { CognitiveTestComponent } from './BTACT-wordListRecall/cognitive-test.co
 import {FormsModule} from '@angular/forms';
 import { ExplainBTACTComponent } from './explain-btact/explain-btact.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
+
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyA0qW5UNzOdLzK9JaqsuYDH1ny0g7tXgKA',
   authDomain: 'cognitive-application.firebaseapp.com',
@@ -38,6 +45,7 @@ const firebaseConfig = {
     HomeComponent,
     CognitiveTestComponent,
     ExplainBTACTComponent,
+    DialogBodyComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +57,11 @@ const firebaseConfig = {
     AngularFirestoreModule, // firestore
     AngularFireStorageModule,
     FormsModule,
+    MatDialogModule,
+    BackButtonDisableModule.forRoot({
+      preserveScrollPosition: true
+    }),
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
