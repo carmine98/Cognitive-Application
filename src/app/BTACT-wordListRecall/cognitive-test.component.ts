@@ -9,6 +9,7 @@ import firebase from 'firebase';
 import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
 
+
 @Component({
   selector: 'app-cognitive-test',
   templateUrl: './cognitive-test.component.html',
@@ -17,6 +18,8 @@ import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
 
 export class CognitiveTestComponent implements OnInit {
 
+  nextButton!: boolean;
+  permission = false;
   isRecording = false;
   private record: any;
   urls = [];
@@ -28,23 +31,19 @@ export class CognitiveTestComponent implements OnInit {
 
 
   constructor(private domSanitizer: DomSanitizer, private db: AngularFirestore, private matDialog: MatDialog) {
-
+    this.nextButton = false;
   }
   // tslint:disable-next-line:typedef
   startRecording() {
     this.isRecording = true;
-
-    const mediaConstraints = {
-      video: false,
-      audio: true
-    };
-    navigator.mediaDevices
-      .getUserMedia(mediaConstraints)
-      .then(this.successCallback.bind(this), this.errorCallback.bind(this));
+    this.permission = true;
+    this.startCountdown(90);
   }
 
   // tslint:disable-next-line:typedef
   successCallback(stream: any) {
+    this.startRecording();
+
     const options = {
       mimeType: 'audio/mp3',
       numberOfAudioChannels: 1
@@ -59,6 +58,7 @@ export class CognitiveTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   stopRecording() {
     this.isRecording = false;
+    this.nextButton = true;
     this.record.stop(this.processRecording.bind(this));
     this.counter = 0;
   }
@@ -125,8 +125,13 @@ export class CognitiveTestComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.startRecording();
-    this.startCountdown(90);
+    const mediaConstraints = {
+      video: false,
+      audio: true
+    };
+    navigator.mediaDevices
+      .getUserMedia(mediaConstraints)
+      .then(this.successCallback.bind(this), this.errorCallback.bind(this));
   }
 
 }

@@ -1,8 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center; padding-top: 15%">
   <h1>
+    <button mat-raised-button *ngIf="!permission">The record is non started yet</button>
     <button mat-raised-button *ngIf="isRecording">Now is recording</button>
-    <button mat-raised-button *ngIf="!isRecording">The record is finished!</button>
+    <button mat-raised-button *ngIf="!isRecording && permission">The record is finished!</button>
   </h1>
 </div>
 <br>
@@ -12,7 +13,7 @@
   </p>
   <br>
   <button mat-raised-button [disabled]="!isRecording" (click)="openDialog()">Stop</button>&nbsp;&nbsp;
-  <button mat-raised-button [disabled]="isRecording">Next</button>
+  <button mat-raised-button [disabled]="!nextButton">Next</button>
 </div>
 
 <div *ngFor="let url of urls">
@@ -21,5 +22,6 @@
     <source [src]="sanitize(url)" type="audio/wav">
   </audio>
 </div>
+
 <router-outlet></router-outlet>
 
