@@ -8,8 +8,21 @@
 .mat-raised-button{
   background: black;
   font-family: "Courier", serif;
-  position: center;
   color: white;
-  left: 43%;
   font-size: large;
 }
+
+.button-close {
+  justify-self: right;
+  font-size: 20px;
+  border: none;
+  height: 30px;
+  background-color: #FFFFFF;
+  outline: none;
+  color: #c04747;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+

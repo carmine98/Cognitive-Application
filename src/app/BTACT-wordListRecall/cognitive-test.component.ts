@@ -26,11 +26,11 @@ export class CognitiveTestComponent implements OnInit {
   private error: any;
   counter!: number;
   id!: string | null;
-  storageRef = firebase.storage().ref('audio/');
+  storageRef = firebase.storage().ref('BTACT/audio/');
   timer!: number;
 
 
-  constructor(private domSanitizer: DomSanitizer, private db: AngularFirestore, private matDialog: MatDialog) {
+  constructor(private domSanitizer: DomSanitizer, private db: AngularFirestore, private matDialog: MatDialog,) {
     this.nextButton = false;
   }
   // tslint:disable-next-line:typedef
@@ -88,7 +88,8 @@ export class CognitiveTestComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   errorCallback(error: any) {
-    this.error = 'Can not play audio in your browser';
+    alert('Please, accept the permission for the microphone and reload the page, else' +
+      'the recording won’t start.');
   }
 
   startCountdown(seconds: number) {
@@ -122,6 +123,7 @@ export class CognitiveTestComponent implements OnInit {
        }
     })
   }
+
 
 
   ngOnInit(): void {
