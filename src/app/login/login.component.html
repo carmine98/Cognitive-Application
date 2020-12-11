@@ -18,13 +18,13 @@
       <br><br>
       <div class="form-group">
         <input type="number" name="age" #Age="ngModel" [(ngModel)]="service.formData.age" class="box"
-               placeholder="Age" min="0" step="1" oninput="validity.valid||(value='');" required>
+               placeholder="Age" min="18" step="1" oninput="validity.valid||(value='');" required>
         <div *ngIf="Age.invalid && Age.touched" style="text-align: center">Age is required.</div>
       </div>
       <br><br>
       <div class="form-group">
         <input list="genre" name="genre" #Genre="ngModel" [(ngModel)]="service.formData.genre" class="box"
-               placeholder="Genre" pattern="^(Male|Female|Not Binary)$" oninput="validity.valid||(value='');" required>
+               placeholder="Genre" oninput="validity.valid||(value='');" required>
         <datalist id="genre">
           <option name="Male">Male</option>
           <option name="Female">Female</option>
@@ -44,7 +44,7 @@
                 class="btn btn-lg btn-block btn btn-outline-success">Submit</button>
         &nbsp;
         <button color="primary" mat-raised-button [disabled]="!startTest" routerLink="../explain-btact"
-                routerLinkActive="acvtive">Start test</button>
+                routerLinkActive="active">Start test</button>
       </div>
       <br>
     </form>

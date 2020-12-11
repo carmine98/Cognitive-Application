@@ -10,6 +10,7 @@ import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
 
 
+
 @Component({
   selector: 'app-cognitive-test',
   templateUrl: './cognitive-test.component.html',
@@ -74,8 +75,9 @@ export class CognitiveTestComponent implements OnInit {
   processRecording(blob: any) {
     // @ts-ignore
     this.urls.push(URL.createObjectURL(blob));
+
     this.id = sessionStorage.getItem('testIdentifier');
-    this.storageRef.child('' + this.id + '_BTACT').put(blob).then(function(snapshot) {
+    this.storageRef.child('' + this.id + '_BTACT.wav').put(blob).then(function(snapshot) {
       console.log('Uploaded a blob or file!');
     });
 
@@ -127,6 +129,7 @@ export class CognitiveTestComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     const mediaConstraints = {
       video: false,
       audio: true
