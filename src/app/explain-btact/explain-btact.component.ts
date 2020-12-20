@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 
-import { AngularFireStorage } from '@angular/fire/storage';
 
 
 @Component({
@@ -12,7 +11,7 @@ export class ExplainBTACTComponent implements OnInit {
 
   audioFinished: boolean;
 
-  constructor(private storage: AngularFireStorage) {
+  constructor() {
     this.audioFinished = false;
 
   }

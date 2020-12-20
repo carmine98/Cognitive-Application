@@ -3,28 +3,27 @@
 
   <div align="center">
     <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
       <div class="form-group">
-        <input type="text" name="surName" #surName="ngModel" [(ngModel)]="service.formData.surname" class="box"
+        <input type="text" name="surname" #surName="ngModel" [(ngModel)]="user.surname" class="box"
                placeholder="Surname" required>
         <div *ngIf="surName.invalid && surName.touched" style="text-align: center">Surname is required.</div>
       </div>
       <br><br>
       <div class="form-group">
-        <input type="text" name="Name" #Name="ngModel" [(ngModel)]="service.formData.name" class="box"
+        <input type="text" name="name" #Name="ngModel" [(ngModel)]="user.name" class="box"
                placeholder="Name" required>
         <div *ngIf="Name.invalid && Name.touched" style="text-align: center">Name is required.</div>
       </div>
       <br><br>
       <div class="form-group">
-        <input type="number" name="age" #Age="ngModel" [(ngModel)]="service.formData.age" class="box"
-               placeholder="Age" min="18" step="1" oninput="validity.valid||(value='');" required>
+        <input type="number" name="age" #Age="ngModel" [(ngModel)]="user.age" class="box"
+               placeholder="Age" min="18" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" required>
         <div *ngIf="Age.invalid && Age.touched" style="text-align: center">Age is required.</div>
       </div>
       <br><br>
       <div class="form-group">
-        <input list="genre" name="genre" #Genre="ngModel" [(ngModel)]="service.formData.genre" class="box"
-               placeholder="Genre" oninput="validity.valid||(value='');" required>
+        <input list="genre" name="genre" #Genre="ngModel" [(ngModel)]="user.genre" class="box"
+               placeholder="Genre" (keydown)="false" (click)="resetGenre()" required>
         <datalist id="genre">
           <option name="Male">Male</option>
           <option name="Female">Female</option>
@@ -34,7 +33,7 @@
       </div>
       <br><br>
       <div class="form-group">
-        <input name="testID" #testID="ngModel" [(ngModel)]="service.formData.testID" class="box"
+        <input name="testID" #testID="ngModel" [(ngModel)]="user.testID" class="box"
                placeholder="Test ID" required>
         <div *ngIf="testID.invalid && testID.touched" style="text-align: center">Test ID is required.</div>
       </div>

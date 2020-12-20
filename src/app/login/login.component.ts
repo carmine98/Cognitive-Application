@@ -1,11 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 
-import { AngularFirestore } from '@angular/fire/firestore';
-import firebase from 'firebase';
+
 import { NgForm } from '@angular/forms';
 import { UsersService } from '../user/users.service';
+import { User } from '../user/user.model';
 
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-login',
@@ -15,12 +16,12 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
 
   message!: string;
-  firestore = firebase.firestore();
   startTest!: boolean;
   testIdentifier!: string;
+  user!: User;
 
 
-  constructor(private db: AngularFirestore, public service: UsersService, private snackbar: MatSnackBar) {
+  constructor(public service: UsersService, private snackbar: MatSnackBar) {
     this.startTest = false;
   }
 
@@ -33,8 +34,7 @@ export class LoginComponent implements OnInit {
     if (form != null) {
       form.resetForm();
     }
-    this.service.formData = {
-      id: '',
+    this.user = {
       surname: '',
       name: '',
       age: null,
@@ -44,36 +44,54 @@ export class LoginComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onSubmit(form: NgForm) {
+  resetGenre(form?: NgForm){
+    if (form != null) {
+      form.resetForm();
+    }
+    this.user.genre = '';
+  }
+
+  // tslint:disable-next-line:typedef
+  async onSubmit(form: NgForm) {
     this.message = '';
-    const userData = Object.assign({}, form.value);
-    delete userData.id;
-    sessionStorage.setItem('testIdentifier', userData.testID);
-    this.testIdentifier = userData.testID;
+    let data;
     const config = new MatSnackBarConfig();
     config.duration = 5000;
     config.panelClass = ['background-red'];
-    this.firestore.collection('utenti')
-      .where('testID', '==', userData.testID)
-      .get()
-      .then((document) => {
-        // Display Retrieved Data To Console
-       if (document.empty){
-         this.db.collection('utenti').add(userData);
-         this.resetForm(form);
-         this.startTest = true;
-         this.message = 'Information is successfully saved!'
-         this.snackbar.open(this.message, undefined, config);
-       } else {
-         this.startTest = false;
-         this.message = 'User has already done the text';
-         this.resetForm(form);
-         this.snackbar.open(this.message, undefined, config);
-        }
-      })
-      .catch((error) => {
-        console.log(`Error getting documents: ${error}`);
+    const user = new User(form.value.surname, form.value.name, form.value.age, form.value.genre, form.value.testID);
+    // @ts-ignore
+    if (user.age <= 18){
+      this.resetForm(form);
+      this.message = 'You must be at least 18 years old to do the test';
+      this.snackbar.open(this.message, undefined, config);
+      return;
+      // @ts-ignore
+    } else if (user.age >= 100){
+      this.resetForm(form);
+      this.message = 'The age value is not possible';
+      this.snackbar.open(this.message, undefined, config);
+      return;
+    }
+    this.testIdentifier = form.value.testID;
+    sessionStorage.setItem('testIdentifier', this.testIdentifier);
+    data = await this.service.getUser(this.testIdentifier);
+    // @ts-ignore
+    if (data !== null) {
+      this.service.addUser(user).subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.log(error);
       });
+      this.startTest = true;
+      this.message = 'Information is successfully saved!';
+      this.resetForm(form);
+      this.snackbar.open(this.message, undefined, config);
+    } else {
+      this.startTest = false;
+      this.message = 'testID is not valid';
+      this.resetForm(form);
+      this.snackbar.open(this.message, undefined, config);
+    }
   }
 
 }

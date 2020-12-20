@@ -3,11 +3,11 @@ import { Component, OnInit} from '@angular/core';
 import * as RecordRTC from 'recordrtc';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { AngularFirestore } from '@angular/fire/firestore';
-import firebase from 'firebase';
 
 import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
@@ -27,11 +27,11 @@ export class CognitiveTestComponent implements OnInit {
   private error: any;
   counter!: number;
   id!: string | null;
-  storageRef = firebase.storage().ref('BTACT/audio/');
   timer!: number;
 
+  private userUrl = 'http://localhost:5000';  // URL to REST API
 
-  constructor(private domSanitizer: DomSanitizer, private db: AngularFirestore, private matDialog: MatDialog,) {
+  constructor(private domSanitizer: DomSanitizer, private matDialog: MatDialog, private http: HttpClient) {
     this.nextButton = false;
   }
   // tslint:disable-next-line:typedef
@@ -64,6 +64,7 @@ export class CognitiveTestComponent implements OnInit {
     this.counter = 0;
   }
 
+  // tslint:disable-next-line:typedef
   public stopRecordingButton() {
     this.isRecording = false;
     this.record.stop();
@@ -77,10 +78,16 @@ export class CognitiveTestComponent implements OnInit {
     this.urls.push(URL.createObjectURL(blob));
 
     this.id = sessionStorage.getItem('testIdentifier');
-    this.storageRef.child('' + this.id + '_BTACT.wav').put(blob).then(function(snapshot) {
-      console.log('Uploaded a blob or file!');
+    const filename = this.id;
+    const url = `${this.userUrl}/uploadAudio`;
+    const fd = new FormData();
+    // @ts-ignore
+    fd.append('audio_data', blob, filename);
+    this.http.post(url, fd).subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
     });
-
   }
 
   // tslint:disable-next-line:typedef
@@ -94,6 +101,7 @@ export class CognitiveTestComponent implements OnInit {
       'the recording won’t start.');
   }
 
+  // tslint:disable-next-line:typedef
   startCountdown(seconds: number) {
     this.counter = seconds;
 
@@ -111,6 +119,7 @@ export class CognitiveTestComponent implements OnInit {
   }
 
 
+  // tslint:disable-next-line:typedef
   openDialog() {
     this.record.pause();
     this.timer = this.counter;
@@ -123,7 +132,7 @@ export class CognitiveTestComponent implements OnInit {
          this.record.resume();
          this.counter = this.timer;
        }
-    })
+    });
   }
 
 
