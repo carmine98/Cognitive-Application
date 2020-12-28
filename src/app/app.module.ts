@@ -21,6 +21,7 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SymbolDigitModalitiesTestComponent } from './symbol-digit-modalities-test/symbol-digit-modalities-test.component';
 
 
 
@@ -32,6 +33,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CognitiveTestComponent,
     ExplainBTACTComponent,
     DialogBodyComponent,
+    SymbolDigitModalitiesTestComponent,
   ],
   imports: [
     BrowserModule,

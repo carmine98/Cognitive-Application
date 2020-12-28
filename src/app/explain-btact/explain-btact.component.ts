@@ -10,10 +10,11 @@ import { Component, OnInit} from '@angular/core';
 export class ExplainBTACTComponent implements OnInit {
 
   audioFinished: boolean;
+  // @ts-ignore
+  audio = new Audio();
 
   constructor() {
     this.audioFinished = false;
-
   }
 
   ngOnInit(): void {
@@ -22,15 +23,19 @@ export class ExplainBTACTComponent implements OnInit {
 
 
   // tslint:disable-next-line:typedef
-  audio() {
+  playAudio() {
     console.log('called');
-    const audio = new Audio();
-    audio.src = "../../../assets/audio/prova.mp3";
-    audio.load();
-    audio.addEventListener('ended', ev => {
+    this.audio.src = '../../../assets/audio/prova.mp3';
+    this.audio.load();
+    this.audio.addEventListener('ended', ev => {
       this.audioFinished = true;
     });
-    audio.play();
+    this.audio.play();
+  }
+
+  // tslint:disable-next-line:typedef
+  stopAudio(){
+    this.audio.pause();
   }
 
 

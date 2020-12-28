@@ -6,6 +6,7 @@ import os
 import wave
 import contextlib
 import speech_recognition as sr
+from string import punctuation, whitespace
 
 UPLOAD_FOLDER_AUDIO = 'BTACT/audio/'
 UPLOAD_FOLDER_TEXT = 'BTACT/text/'
@@ -14,6 +15,8 @@ app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_AUDIO
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
+
+words = ['wild', 'yellow', 'whisper', 'legend', 'copy', 'focus', 'frighten', 'clothing', 'lizard', 'mortgage', 'stew', 'fingermail','patent', 'deny', 'carnival']
 
 
 @app.route('/add', methods=['OPTIONS','POST'])
@@ -120,10 +123,24 @@ def upload_audio():
             outFile=open(UPLOAD_FOLDER_TEXT + fname1, "w")
             outFile.write(text)
             outFile.close()
+            s=[]
+            with open(UPLOAD_FOLDER_TEXT + fname1, "r") as myfile:
+                content=myfile.read().split()  
+                for word in content:
+                    if((word in punctuation) or (word in whitespace)) :
+                        pass
+                    else:
+                        s.append(word.lower())
+            print(s)
             print(text)
+            count = 0
+            for x in words:
+                if x in s:
+                    count = count + 1
+            print(count)
         try:
             sql = "INSERT INTO BTACT (testID, path_audio, time, path_text, score) VALUES (%s, %s, %s, %s, %s)"
-            val = (testID, UPLOAD_FOLDER_AUDIO + fname, time, UPLOAD_FOLDER_TEXT + fname1, 3)
+            val = (testID, UPLOAD_FOLDER_AUDIO + fname, time, UPLOAD_FOLDER_TEXT + fname1, count)
             cursor.execute(sql, val)
             conn.commit()
         except Exception as e:
@@ -133,6 +150,51 @@ def upload_audio():
             conn.close()
         
     return 'file uploaded successfully'
+
+@app.route('/uploadSymbolTest', methods = ['GET', 'POST'])
+def upload_symbol():
+    conn = db.get_connection()
+    cursor = conn.cursor()
+    try:
+        sequence = ['1', '4', '8', '2', '7', '6', '9', '3', '5', '8', '3', '1', '9', '2', '5', '6', '4', '3',
+                '7', '2', '9', '8', '1', '4', '7', '6', '5', '9', '1', '2', '4', '7', '2', '5', '6', '9',
+                '5', '8', '6', '4', '3', '1', '7', '8', '3', '1', '3', '9', '6', '3', '9', '7', '5', '1',
+                '4', '2', '8', '7', '2', '8', '5', '6', '4', '7', '6', '4', '1', '3', '2', '8', '1', '7',
+                '9', '2', '5', '3', '4', '8', '6', '5', '9', '8', '1', '9', '5', '1', '4', '2', '6', '9',
+                '8', '7', '3', '5', '6', '4', '7', '2', '3', '3', '6', '8', '9', '1', '8', '4', '7', '5',
+                '2', '9', '6', '7', '1', '5', '2', '3', '4', '6', '4', '1', '9', '5', '7', '3', '6', '8',
+                '3', '2', '7', '5', '8', '4', '2', '9', '1', '6', '3', '8', '7', '1', '2', '6', '4', '9', '']
+                
+        mydict = dict()
+
+        for index,value in enumerate(sequence):
+            mydict[index] = value
+
+        print(mydict)
+
+        _json = request.get_json()
+        print(_json)
+        count = 0 
+        for key in _json:
+            n = int(key)
+            value = mydict.get(n)
+            if value == _json[key]:
+                count = count + 1  
+        print(count)
+        testID = _json['144']
+        sql = "INSERT INTO WRITTEN_SYMBOL (testID, score_test) VALUES (%s, %s)"
+        val = (testID, count)
+        cursor.execute(sql, val)
+        conn.commit()
+        resp = jsonify('Data received succesfull')
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+    finally: 
+        cursor.close()
+        conn.close()
+    
 
 
 

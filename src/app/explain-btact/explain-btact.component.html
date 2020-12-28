@@ -10,8 +10,8 @@
 </div>
 <br><br>
 <div style="text-align:center;">
-    <button mat-raised-button (click)="audio()">Play</button>&nbsp;&nbsp;
-    <button mat-raised-button routerLink="../btact" routerLinkActive="active" [disabled]="!audioFinished">Next</button>
+    <button mat-raised-button (click)="playAudio()">Play</button>&nbsp;&nbsp;
+    <button mat-raised-button routerLink="../btact" routerLinkActive="active" [disabled]="!audioFinished" (click)="stopAudio()">Next</button>
 </div>
   <br><br>
 <div>

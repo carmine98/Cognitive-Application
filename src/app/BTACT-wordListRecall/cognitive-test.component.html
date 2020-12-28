@@ -13,7 +13,8 @@
   </p>
   <br>
   <button mat-raised-button [disabled]="!isRecording" (click)="openDialog()">Stop</button>&nbsp;&nbsp;
-  <button mat-raised-button [disabled]="!nextButton">Next</button>
+  <button mat-raised-button [disabled]="!nextButton" routerLink="../symbol"
+          routerLinkActive="active">Next</button>
 </div>
 <br>
 <br>
