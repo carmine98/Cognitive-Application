@@ -1,5 +1,7 @@
 .box{
   width: 3.2%;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 ::-webkit-input-placeholder {
@@ -31,5 +33,6 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
 
 

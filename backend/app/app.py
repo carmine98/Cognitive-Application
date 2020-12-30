@@ -16,7 +16,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_AUDIO
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
-words = ['wild', 'yellow', 'whisper', 'legend', 'copy', 'focus', 'frighten', 'clothing', 'lizard', 'mortgage', 'stew', 'fingermail','patent', 'deny', 'carnival']
+words = ['drum', 'curtain', 'bell', 'coffee', 'school', 'parent', 'moon', 'garden', 'hat', 'farmer', 'nose', 'turkey', 'color', 'house', 'river']
 
 
 @app.route('/add', methods=['OPTIONS','POST'])

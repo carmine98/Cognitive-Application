@@ -18,347 +18,348 @@
   <img src="/assets/images/sequence.png" width="70%" height="auto">
 </div>
 <div align="center">
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
 </div>
 <div align="center">
     <div>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value1"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value2"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value3"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value4"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value5"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value6"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value7"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value8"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value9"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value10"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value11"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value12"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value13"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value14"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value15"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value16"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value17"/>
-      <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value18"/>
+      <input id="input1" (input)="onInputEntry($event, input2)" type="text" maxlength="1"   oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value1"/>
+      <input #input2 (input)="onInputEntry($event, input3)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value2"/>
+      <input #input3 (input)="onInputEntry($event, input4)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value3"/>
+      <input #input4 (input)="onInputEntry($event, input5)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value4"/>
+      <input #input5 (input)="onInputEntry($event, input6)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value5"/>
+      <input #input6 (input)="onInputEntry($event, input7)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value6"/>
+      <input #input7 (input)="onInputEntry($event, input8)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value7"/>
+      <input #input8 (input)="onInputEntry($event, input9)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value8"/>
+      <input #input9 (input)="onInputEntry($event, input10)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value9"/>
+      <input #input10 (input)="onInputEntry($event, input11)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value10"/>
+      <input #input11 (input)="onInputEntry($event, input12)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value11"/>
+      <input #input12 (input)="onInputEntry($event, input13)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value12"/>
+      <input #input13 (input)="onInputEntry($event, input14)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value13"/>
+      <input #input14 (input)="onInputEntry($event, input15)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value14"/>
+      <input #input15 (input)="onInputEntry($event, input16)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value15"/>
+      <input #input16 (input)="onInputEntry($event, input17)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value16"/>
+      <input #input17 (input)="onInputEntry($event, input18)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value17"/>
+      <input #input18 (input)="onInputEntry($event, input19)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value18"/>
     </div>
 </div>
 <br>
 <div align="center">
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
 </div>
 <div align="center">
   <div>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value19"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value20"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value21"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value22"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value23"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value24"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value25"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value26"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value27"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value28"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value29"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value30"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value31"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value32"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value33"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value34"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value35"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value36"/>
+    <input #input19 (input)="onInputEntry($event, input20)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value19"/>
+    <input #input20 (input)="onInputEntry($event, input21)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value20"/>
+    <input #input21 (input)="onInputEntry($event, input22)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value21"/>
+    <input #input22 (input)="onInputEntry($event, input23)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value22"/>
+    <input #input23 (input)="onInputEntry($event, input24)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value23"/>
+    <input #input24 (input)="onInputEntry($event, input25)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value24"/>
+    <input #input25 (input)="onInputEntry($event, input26)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value25"/>
+    <input #input26 (input)="onInputEntry($event, input27)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value26"/>
+    <input #input27 (input)="onInputEntry($event, input28)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value27"/>
+    <input #input28 (input)="onInputEntry($event, input29)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value28"/>
+    <input #input29 (input)="onInputEntry($event, input30)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value29"/>
+    <input #input30 (input)="onInputEntry($event, input31)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value30"/>
+    <input #input31 (input)="onInputEntry($event, input32)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value31"/>
+    <input #input32 (input)="onInputEntry($event, input33)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value32"/>
+    <input #input33 (input)="onInputEntry($event, input34)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value33"/>
+    <input #input34 (input)="onInputEntry($event, input35)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value34"/>
+    <input #input35 (input)="onInputEntry($event, input36)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value35"/>
+    <input #input36 (input)="onInputEntry($event, input37)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value36"/>
   </div>
 </div>
 <br>
 <div align="center">
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
 </div>
 <div align="center">
   <div>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value37"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value38"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value39"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value40"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value41"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value42"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value43"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value44"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value45"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value46"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value47"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value48"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value49"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value50"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value51"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value52"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value53"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value54"/>
+    <input #input37 (input)="onInputEntry($event, input38)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value37"/>
+    <input #input38 (input)="onInputEntry($event, input39)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value38"/>
+    <input #input39 (input)="onInputEntry($event, input40)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value39"/>
+    <input #input40 (input)="onInputEntry($event, input41)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value40"/>
+    <input #input41 (input)="onInputEntry($event, input42)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value41"/>
+    <input #input42 (input)="onInputEntry($event, input43)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value42"/>
+    <input #input43 (input)="onInputEntry($event, input44)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value43"/>
+    <input #input44 (input)="onInputEntry($event, input45)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value44"/>
+    <input #input45 (input)="onInputEntry($event, input46)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value45"/>
+    <input #input46 (input)="onInputEntry($event, input47)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value46"/>
+    <input #input47 (input)="onInputEntry($event, input48)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value47"/>
+    <input #input48 (input)="onInputEntry($event, input49)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value48"/>
+    <input #input49 (input)="onInputEntry($event, input50)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value49"/>
+    <input #input50 (input)="onInputEntry($event, input51)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value50"/>
+    <input #input51 (input)="onInputEntry($event, input52)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value51"/>
+    <input #input52 (input)="onInputEntry($event, input53)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value52"/>
+    <input #input53 (input)="onInputEntry($event, input54)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value53"/>
+    <input #input54 (input)="onInputEntry($event, input55)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value54"/>
   </div>
 </div>
 <br>
 <div align="center">
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
 </div>
 <div align="center">
   <div>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value55"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value56"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value57"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value58"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value59"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value60"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value61"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value62"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value63"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value64"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value65"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value66"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value67"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value68"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value69"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value70"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value71"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value72"/>
+    <input #input55 (input)="onInputEntry($event, input56)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value55"/>
+    <input #input56 (input)="onInputEntry($event, input57)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value56"/>
+    <input #input57 (input)="onInputEntry($event, input58)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value57"/>
+    <input #input58 (input)="onInputEntry($event, input59)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value58"/>
+    <input #input59 (input)="onInputEntry($event, input60)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value59"/>
+    <input #input60 (input)="onInputEntry($event, input61)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value60"/>
+    <input #input61 (input)="onInputEntry($event, input62)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value61"/>
+    <input #input62 (input)="onInputEntry($event, input63)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value62"/>
+    <input #input63 (input)="onInputEntry($event, input64)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value63"/>
+    <input #input64 (input)="onInputEntry($event, input65)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value64"/>
+    <input #input65 (input)="onInputEntry($event, input66)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value65"/>
+    <input #input66 (input)="onInputEntry($event, input67)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value66"/>
+    <input #input67 (input)="onInputEntry($event, input68)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value67"/>
+    <input #input68 (input)="onInputEntry($event, input69)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value68"/>
+    <input #input69 (input)="onInputEntry($event, input70)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value69"/>
+    <input #input70 (input)="onInputEntry($event, input71)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value70"/>
+    <input #input71 (input)="onInputEntry($event, input72)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value71"/>
+    <input #input72 (input)="onInputEntry($event, input73)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value72"/>
   </div>
 </div>
 <br>
 <div align="center">
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
 </div>
 <div align="center">
   <div>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value73"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value74"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value75"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value76"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value77"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value78"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value79"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value80"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value81"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value82"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value83"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value84"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value85"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value86"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value87"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value88"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value89"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value90"/>
+    <input #input73 (input)="onInputEntry($event, input74)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value73"/>
+    <input #input74 (input)="onInputEntry($event, input75)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value74"/>
+    <input #input75 (input)="onInputEntry($event, input76)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value75"/>
+    <input #input76 (input)="onInputEntry($event, input77)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value76"/>
+    <input #input77 (input)="onInputEntry($event, input78)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value77"/>
+    <input #input78 (input)="onInputEntry($event, input79)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value78"/>
+    <input #input79 (input)="onInputEntry($event, input80)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value79"/>
+    <input #input80 (input)="onInputEntry($event, input81)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value80"/>
+    <input #input81 (input)="onInputEntry($event, input900)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value81"/>
+    <input #input900 (input)="onInputEntry($event, input82)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value82"/>
+    <input #input82 (input)="onInputEntry($event, input83)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value83"/>
+    <input #input83 (input)="onInputEntry($event, input84)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value84"/>
+    <input #input84 (input)="onInputEntry($event, input85)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value85"/>
+    <input #input85 (input)="onInputEntry($event, input86)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value86"/>
+    <input #input86 (input)="onInputEntry($event, input87)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value87"/>
+    <input #input87 (input)="onInputEntry($event, input88)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value88"/>
+    <input #input88 (input)="onInputEntry($event, input89)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value89"/>
+    <input #input89 (input)="onInputEntry($event, input90)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value90"/>
   </div>
 </div>
 <br>
 <div align="center">
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
 </div>
 <div align="center">
   <div>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value91"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value92"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value93"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value94"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value95"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value96"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value97"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value98"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value99"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value100"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value101"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value102"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value103"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value104"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value105"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value106"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value107"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value108"/>
+    <input #input90 (input)="onInputEntry($event, input91)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value91"/>
+    <input #input91 (input)="onInputEntry($event, input92)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value92"/>
+    <input #input92 (input)="onInputEntry($event, input93)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value93"/>
+    <input #input93 (input)="onInputEntry($event, input94)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value94"/>
+    <input #input94 (input)="onInputEntry($event, input95)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value95"/>
+    <input #input95 (input)="onInputEntry($event, input96)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value96"/>
+    <input #input96 (input)="onInputEntry($event, input97)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value97"/>
+    <input #input97 (input)="onInputEntry($event, input98)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value98"/>
+    <input #input98 (input)="onInputEntry($event, input99)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value99"/>
+    <input #input99 (input)="onInputEntry($event, input100)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value100"/>
+    <input #input100 (input)="onInputEntry($event, input101)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value101"/>
+    <input #input101 (input)="onInputEntry($event, input102)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value102"/>
+    <input #input102 (input)="onInputEntry($event, input103)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value103"/>
+    <input #input103 (input)="onInputEntry($event, input104)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value104"/>
+    <input #input104 (input)="onInputEntry($event, input105)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value105"/>
+    <input #input105 (input)="onInputEntry($event, input106)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value106"/>
+    <input #input106 (input)="onInputEntry($event, input107)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value107"/>
+    <input #input107 (input)="onInputEntry($event, input108)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value108"/>
   </div>
 </div>
 <br>
 <div align="center">
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
 </div>
 <div align="center">
   <div>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value109"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value110"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value111"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value112"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value113"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value114"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value115"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value116"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value117"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value118"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value119"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value120"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value121"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value122"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value123"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value124"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value125"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value126"/>
+    <input #input108 (input)="onInputEntry($event, input109)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value109"/>
+    <input #input109 (input)="onInputEntry($event, input110)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value110"/>
+    <input #input110 (input)="onInputEntry($event, input111)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value111"/>
+    <input #input111 (input)="onInputEntry($event, input112)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value112"/>
+    <input #input112 (input)="onInputEntry($event, input113)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value113"/>
+    <input #input113 (input)="onInputEntry($event, input114)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value114"/>
+    <input #input114 (input)="onInputEntry($event, input115)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value115"/>
+    <input #input115 (input)="onInputEntry($event, input116)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value116"/>
+    <input #input116 (input)="onInputEntry($event, input117)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value117"/>
+    <input #input117 (input)="onInputEntry($event, input118)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value118"/>
+    <input #input118 (input)="onInputEntry($event, input119)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value119"/>
+    <input #input119 (input)="onInputEntry($event, input120)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value120"/>
+    <input #input120 (input)="onInputEntry($event, input121)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value121"/>
+    <input #input121 (input)="onInputEntry($event, input122)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value122"/>
+    <input #input122 (input)="onInputEntry($event, input123)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value123"/>
+    <input #input123 (input)="onInputEntry($event, input124)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value124"/>
+    <input #input124 (input)="onInputEntry($event, input125)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value125"/>
+    <input #input125 (input)="onInputEntry($event, input126)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value126"/>
   </div>
 </div>
 <br>
 <div align="center">
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="U" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="⊐" class="textBox"/>
-  <input type="text" placeholder="X" class="textBox"/>
-  <input type="text" placeholder="^" class="textBox"/>
-  <input type="text" placeholder="-" class="textBox"/>
-  <input type="text" placeholder="Ͷ" class="textBox"/>
-  <input type="text" placeholder="O" class="textBox"/>
-  <input type="text" placeholder="∟" class="textBox"/>
-  <input type="text" placeholder="=" class="textBox"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="U" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="⊐" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="X" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="^" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="-" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="Ͷ" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="O" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="∟" class="textBox" tabindex="-1"/>
+  <input type="text" placeholder="=" class="textBox" tabindex="-1"/>
 </div>
 <div align="center">
   <div>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value127"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value128"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value129"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value130"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value131"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value132"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value133"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value134"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value135"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value136"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value137"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value138"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value139"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value140"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value141"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value142"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value143"/>
-    <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value144"/>
+    <input #input126 (input)="onInputEntry($event, input127)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value127"/>
+    <input #input127 (input)="onInputEntry($event, input128)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value128"/>
+    <input #input128 (input)="onInputEntry($event, input129)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value129"/>
+    <input #input129 (input)="onInputEntry($event, input130)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value130"/>
+    <input #input130 (input)="onInputEntry($event, input131)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value131"/>
+    <input #input131 (input)="onInputEntry($event, input132)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value132"/>
+    <input #input132 (input)="onInputEntry($event, input133)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value133"/>
+    <input #input133 (input)="onInputEntry($event, input134)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value134"/>
+    <input #input134 (input)="onInputEntry($event, input135)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value135"/>
+    <input #input135 (input)="onInputEntry($event, input136)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value136"/>
+    <input #input136 (input)="onInputEntry($event, input137)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value137"/>
+    <input #input137 (input)="onInputEntry($event, input138)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value138"/>
+    <input #input138 (input)="onInputEntry($event, input139)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value139"/>
+    <input #input139 (input)="onInputEntry($event, input140)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value140"/>
+    <input #input140 (input)="onInputEntry($event, input141)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value141"/>
+    <input #input141 (input)="onInputEntry($event, input142)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value142"/>
+    <input #input142 (input)="onInputEntry($event, input143)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value143"/>
+    <input #input143 type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value144"/>
   </div>
 </div>
 <br><br>
+
 

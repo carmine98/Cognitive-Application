@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
+import { HostListener } from '@angular/core';
+
 
 @Component({
   selector: 'app-symbol-digit-modalities-test',
@@ -8,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./symbol-digit-modalities-test.component.scss']
 })
 export class SymbolDigitModalitiesTestComponent implements OnInit {
-
 
   constructor(private http: HttpClient) {
     this.audioFinished = false;
@@ -169,6 +170,30 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   value143: any;
   value144: any;
 
+  @HostListener('document:keydown.tab', ['$event'])
+  // tslint:disable-next-line:typedef
+  onKeydownHandler(event: KeyboardEvent) {
+    event.preventDefault();
+  }
+
+  @HostListener('mousedown', ['$event'])
+  // tslint:disable-next-line:typedef
+  onClick(event: MouseEvent) {
+    console.log('click');
+    event.stopPropagation();
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+
+  @HostListener('mouseup', ['$event'])
+  // tslint:disable-next-line:typedef
+  onClick2(event: MouseEvent) {
+    console.log('click2');
+    event.stopPropagation();
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+
   ngOnInit(): void {
   }
 
@@ -229,6 +254,10 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
       this.audioFinished = true;
       this.startCountdown(90);
       this.audioButton = false;
+      setTimeout(() => { // this will make the execution after the above boolean has changed
+        // @ts-ignore
+        document.getElementById('input1').focus();
+      }, 0);
     });
     audio.play();
   }
@@ -236,6 +265,7 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startCountdown(seconds: number) {
     this.counter = seconds;
+
 
     const interval = setInterval(() => {
       console.log(this.counter);
@@ -251,5 +281,17 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
       }
     }, 1000);
   }
+
+  // tslint:disable-next-line:typedef
+  onInputEntry(event: { target: any; }, nextInput: { focus: () => void; }) {
+    const input = event.target;
+    const length = input.value.length;
+    const maxLength = input.attributes.maxlength.value;
+    // @ts-ignore
+    if (length >= maxLength) {
+      nextInput.focus();
+    }
+  }
+
 
 }
