@@ -91,11 +91,6 @@ export class CognitiveTestComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  sanitize(url: string) {
-    return this.domSanitizer.bypassSecurityTrustUrl(url);
-  }
-
-  // tslint:disable-next-line:typedef
   errorCallback(error: any) {
     alert('Please, accept the permission for the microphone and reload the page, else' +
       'the recording won’t start.');

@@ -3,6 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HostListener } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-symbol-digit-modalities-test',
@@ -11,7 +13,7 @@ import { HostListener } from '@angular/core';
 })
 export class SymbolDigitModalitiesTestComponent implements OnInit {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.audioFinished = false;
     this.nextButton = false;
     this.audioButton = true;
@@ -23,6 +25,7 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   private userUrl = 'http://localhost:5000';
   counter!: number;
   id!: string | null;
+  input!: any;
 
   // tslint:disable-next-line:typedef
   value1: any;
@@ -174,24 +177,63 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onKeydownHandler(event: KeyboardEvent) {
     event.preventDefault();
+    event.stopPropagation();
+    event.preventDefault();
+    event.stopImmediatePropagation();
   }
 
   @HostListener('mousedown', ['$event'])
   // tslint:disable-next-line:typedef
   onClick(event: MouseEvent) {
-    console.log('click');
+    this.input.focus();
+    console.log('mousedown');
     event.stopPropagation();
     event.preventDefault();
     event.stopImmediatePropagation();
+    this.onClick4(event);
   }
 
   @HostListener('mouseup', ['$event'])
   // tslint:disable-next-line:typedef
   onClick2(event: MouseEvent) {
-    console.log('click2');
+    console.log('mouseup');
+    this.input.focus();
     event.stopPropagation();
     event.preventDefault();
     event.stopImmediatePropagation();
+    this.onClick4(event);
+  }
+
+  @HostListener('mouseout', ['$event'])
+  // tslint:disable-next-line:typedef
+  onClick3(event: MouseEvent) {
+    console.log('mouseout');
+    this.input.focus();
+    event.stopPropagation();
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    this.onClick4(event);
+  }
+
+  @HostListener('click', ['$event'])
+  // tslint:disable-next-line:typedef
+  onClick4(event: MouseEvent) {
+    console.log('click');
+    this.input.focus();
+    event.stopPropagation();
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+
+  @HostListener('contextmenu', ['$event'])
+  // tslint:disable-next-line:typedef
+  onClick5(event: MouseEvent) {
+    console.log('contextmenu');
+    this.input.focus();
+    event.stopPropagation();
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    this.onClick4(event);
   }
 
   ngOnInit(): void {
@@ -252,7 +294,7 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
     audio.load();
     audio.addEventListener('ended', ev => {
       this.audioFinished = true;
-      this.startCountdown(90);
+      this.startCountdown(120);
       this.audioButton = false;
       setTimeout(() => { // this will make the execution after the above boolean has changed
         // @ts-ignore
@@ -266,7 +308,6 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   startCountdown(seconds: number) {
     this.counter = seconds;
 
-
     const interval = setInterval(() => {
       console.log(this.counter);
       // @ts-ignore
@@ -278,6 +319,7 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
         this.audioFinished = false;
         this.nextButton = true;
         this.createObject();
+        this.router.navigateByUrl('/explain-arrows');
       }
     }, 1000);
   }
@@ -285,6 +327,7 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onInputEntry(event: { target: any; }, nextInput: { focus: () => void; }) {
     const input = event.target;
+    this.input = nextInput;
     const length = input.value.length;
     const maxLength = input.attributes.maxlength.value;
     // @ts-ignore

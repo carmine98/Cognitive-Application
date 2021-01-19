@@ -22,6 +22,10 @@ import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SymbolDigitModalitiesTestComponent } from './symbol-digit-modalities-test/symbol-digit-modalities-test.component';
+import { ExplainArrowsTestComponent } from './explain-arrows-test/explain-arrows-test.component';
+import { ArrowsTestComponent } from './arrows-test/arrows-test.component';
+import { ArrowsTestRealComponent } from './arrows-test-real/arrows-test-real.component';
+import { BeforeArrowComponent } from './before-arrow/before-arrow.component';
 
 
 
@@ -34,6 +38,10 @@ import { SymbolDigitModalitiesTestComponent } from './symbol-digit-modalities-te
     ExplainBTACTComponent,
     DialogBodyComponent,
     SymbolDigitModalitiesTestComponent,
+    ExplainArrowsTestComponent,
+    ArrowsTestComponent,
+    ArrowsTestRealComponent,
+    BeforeArrowComponent,
   ],
   imports: [
     BrowserModule,

@@ -19,12 +19,5 @@
 <br>
 <br>
 
-<div *ngFor="let url of urls">
-  <!-- <audio controls="" *ngIf="url"> -->
-  <audio controls="" *ngIf="url">
-    <source [src]="sanitize(url)" type="audio/wav">
-  </audio>
-</div>
-
 <router-outlet></router-outlet>
 
