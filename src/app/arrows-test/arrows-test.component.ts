@@ -1551,7 +1551,7 @@ export class ArrowsTestComponent implements OnInit {
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
         this.button = false;
-        const r4 = this.getRandomTime(0.4, 1.6) + + 1;
+        const r4 = this.getRandomTime(0.4, 1.6) + 1;
         this.startTimerBeforeCue6(r4);
       }
     }, 100);
@@ -1583,7 +1583,7 @@ export class ArrowsTestComponent implements OnInit {
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
         this.button = false;
-        const r5 = this.getRandomTime(0.4, 1.6) + + 1;
+        const r5 = this.getRandomTime(0.4, 1.6) +  1;
         this.startTimerBeforeCueSpecial(r5);
       }
     }, 100);
@@ -1764,7 +1764,7 @@ export class ArrowsTestComponent implements OnInit {
         const img2 = document.getElementById('arrow2') as HTMLImageElement;
         img2.src = '';
         this.button = false;
-        const r4 = this.getRandomTime(0.4, 1.6) + + 1;
+        const r4 = this.getRandomTime(0.4, 1.6) +  1;
         this.startTimerBeforeCueSpecial6(r4);
       }
     }, 100);
