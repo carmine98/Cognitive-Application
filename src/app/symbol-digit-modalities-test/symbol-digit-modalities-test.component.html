@@ -354,7 +354,7 @@
     <input #input140 (input)="onInputEntry($event, input141)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value141"/>
     <input #input141 (input)="onInputEntry($event, input142)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value142"/>
     <input #input142 (input)="onInputEntry($event, input143)" type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value143"/>
-    <input #input143 type="text" maxlength="1"    oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value144"/>
+    <input #input143 (input)="finishTest()" type="text" maxlength="1" oninput="this.value=this.value.replace(/[^1-9]/g,'');" class="box" [disabled]="!audioFinished" [(ngModel)]="value144"/>
   </div>
 </div>
 <br><br>

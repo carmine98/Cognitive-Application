@@ -9,6 +9,8 @@ import { ExplainArrowsTestComponent } from './explain-arrows-test/explain-arrows
 import { ArrowsTestComponent } from './arrows-test/arrows-test.component';
 import { ArrowsTestRealComponent } from './arrows-test-real/arrows-test-real.component';
 import { BeforeArrowComponent } from './before-arrow/before-arrow.component';
+import { FinalPageComponent} from './final-page/final-page.component';
+import {F} from "@angular/cdk/keycodes";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,8 +20,9 @@ const routes: Routes = [
   { path: 'symbol', component: SymbolDigitModalitiesTestComponent },
   { path: 'explain-arrows', component: ExplainArrowsTestComponent },
   { path: 'arrows-test-tutorial', component: ArrowsTestComponent },
-  { path: 'arrows-test', component: ArrowsTestRealComponent},
-  { path: 'before', component: BeforeArrowComponent}
+  { path: 'arrows-test', component: ArrowsTestRealComponent },
+  { path: 'before', component: BeforeArrowComponent },
+  { path: 'final', component: FinalPageComponent}
 ];
 
 @NgModule({

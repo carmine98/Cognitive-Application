@@ -26,6 +26,7 @@ import { ExplainArrowsTestComponent } from './explain-arrows-test/explain-arrows
 import { ArrowsTestComponent } from './arrows-test/arrows-test.component';
 import { ArrowsTestRealComponent } from './arrows-test-real/arrows-test-real.component';
 import { BeforeArrowComponent } from './before-arrow/before-arrow.component';
+import { FinalPageComponent } from './final-page/final-page.component';
 
 
 
@@ -42,6 +43,7 @@ import { BeforeArrowComponent } from './before-arrow/before-arrow.component';
     ArrowsTestComponent,
     ArrowsTestRealComponent,
     BeforeArrowComponent,
+    FinalPageComponent,
   ],
   imports: [
     BrowserModule,

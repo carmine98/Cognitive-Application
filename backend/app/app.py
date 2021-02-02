@@ -196,6 +196,32 @@ def upload_symbol():
         conn.close()
     
 
+@app.route('/uploadArrowTest', methods = ['GET', 'POST'])
+def upload_arrowtest():
+    conn = db.get_connection()
+    cursor = conn.cursor()
+    try:
+        _json = request.get_json()
+        print(_json)
+        testID = _json['0']
+        print(testID)
+        rt_total = _json['1']
+        print(rt_total)
+        totalScore = _json['2']
+        print(totalScore)
+        sql = "INSERT INTO ARROW_TEST (testID, RT_total, totalScore) VALUES (%s, %s, %s)"
+        val = (testID, rt_total, totalScore)
+        cursor.execute(sql, val)
+        conn.commit()
+        resp = jsonify('Data received succesfull')
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+    finally: 
+        cursor.close()
+        conn.close()
+    
 
 
 if __name__ == "__main__":

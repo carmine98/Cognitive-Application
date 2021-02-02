@@ -1187,7 +1187,7 @@ export class ArrowsTestComponent implements OnInit {
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
         this.button = false;
-        const r5 = this.getRandomTime(0.4, 1.6) + + 1;
+        const r5 = this.getRandomTime(0.4, 1.6) + 1;
         this.startTimerBeforeStar(r5);
       }
     }, 100);

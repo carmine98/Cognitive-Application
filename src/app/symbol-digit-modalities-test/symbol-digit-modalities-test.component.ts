@@ -336,5 +336,9 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
+  finishTest(){
+    this.counter = -1;
+  }
 
 }
