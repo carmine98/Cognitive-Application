@@ -34,6 +34,7 @@ export class ArrowsTestRealComponent implements OnInit {
   id!: string | null;
   private userUrl = 'http://localhost:5000';
   timeRightAnswer!: number;
+  finalRightAnswer!: number;
 
   constructor(private http: HttpClient, private router: Router) {
     this.cue1 = false;
@@ -47,6 +48,7 @@ export class ArrowsTestRealComponent implements OnInit {
 
     this.counterRightAnswer = 0;
     this.timeRightAnswer = 0;
+    this.finalRightAnswer = 0;
 
     this.k = 0;
 
@@ -65,9 +67,9 @@ export class ArrowsTestRealComponent implements OnInit {
       const sequence = [];
       this.id = sessionStorage.getItem('testIdentifier');
 
-      this.counterRightAnswer = Number(this.counterRightAnswer.toFixed(3));
+      this.finalRightAnswer = Number(this.finalRightAnswer.toFixed(3));
 
-      sequence.push(this.id, this.counterRightAnswer, this.rightAnswer);
+      sequence.push(this.id, this.finalRightAnswer, this.rightAnswer);
 
       const prova = Object.assign({}, sequence);
       console.log(prova);
@@ -1966,7 +1968,9 @@ export class ArrowsTestRealComponent implements OnInit {
 
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -1976,7 +1980,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2022,7 +2027,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2032,7 +2039,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2077,7 +2085,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2087,7 +2097,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2132,7 +2143,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2142,7 +2155,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2187,7 +2201,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2197,7 +2213,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2242,7 +2259,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2252,7 +2271,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2297,7 +2317,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2307,7 +2329,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2334,7 +2357,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2344,7 +2369,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2371,7 +2397,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2381,7 +2409,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2408,7 +2437,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2418,7 +2449,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2445,7 +2477,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2455,7 +2489,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2482,7 +2517,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2492,7 +2529,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2519,7 +2557,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2529,7 +2569,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2556,7 +2597,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2566,7 +2609,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2593,7 +2637,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2603,7 +2649,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2630,7 +2677,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2640,7 +2689,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2667,7 +2717,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2676,7 +2728,8 @@ export class ArrowsTestRealComponent implements OnInit {
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent); this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           this.wrongAnswer++;
         }
@@ -2702,7 +2755,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2712,7 +2767,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2739,7 +2795,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2749,7 +2807,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2776,7 +2835,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2786,7 +2847,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2813,7 +2875,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2823,7 +2887,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2850,7 +2915,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2860,7 +2927,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2887,7 +2955,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2897,7 +2967,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2924,7 +2995,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2934,7 +3007,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2961,7 +3035,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -2971,7 +3047,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -2998,7 +3075,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3008,7 +3087,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3035,7 +3115,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3045,7 +3127,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3072,7 +3155,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3082,7 +3167,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3109,7 +3195,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3119,7 +3207,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3146,7 +3235,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3156,7 +3247,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3183,7 +3275,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3193,7 +3287,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3220,7 +3315,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3230,7 +3327,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3257,7 +3355,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3267,7 +3367,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3294,7 +3395,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3304,7 +3407,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3331,7 +3435,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3341,7 +3447,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3368,7 +3475,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3378,7 +3487,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3405,7 +3515,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3415,7 +3527,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3442,7 +3555,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3452,7 +3567,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3481,7 +3597,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3491,7 +3609,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3521,7 +3640,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3531,7 +3652,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3561,7 +3683,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3571,7 +3695,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3601,7 +3726,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3611,7 +3738,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3641,7 +3769,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3651,7 +3781,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3682,7 +3813,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3692,7 +3825,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3722,7 +3856,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3732,7 +3868,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3762,7 +3899,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3772,7 +3911,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3802,7 +3942,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3812,7 +3954,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3842,7 +3985,9 @@ export class ArrowsTestRealComponent implements OnInit {
     const interval = setInterval(() => {
       // console.log(this.counterAnswer);
       // @ts-ignore
-      this.timeRightAnswer = 1.7 - this.counterAnswer;
+      if (this.counterAnswer !== -1){
+        this.timeRightAnswer = this.counterAnswer;
+      }
       console.log(this.timeRightAnswer);
       this.counterAnswer = this.counterAnswer - 0.1;
       // @ts-ignore
@@ -3852,7 +3997,8 @@ export class ArrowsTestRealComponent implements OnInit {
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = this.counterRightAnswer + this.timeRightAnswer;
+          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           // console.log(congruent);
           this.wrongAnswer++;
@@ -3879,6 +4025,8 @@ export class ArrowsTestRealComponent implements OnInit {
           const r = this.getRandomTime(0.4, 1.6);
           console.log(items[this.k]);
           this.userAnswer = '';
+          this.counterRightAnswer = 0;
+          this.timeRightAnswer = 0;
           if (items[this.k] === 0 || items[this.k] === 1){
             this.startTimerCongruentLeftUp(r);
           }
@@ -4023,7 +4171,7 @@ export class ArrowsTestRealComponent implements OnInit {
           if (items[this.k] === 94 || items[this.k] === 95){
             this.startTimerSpecialCueNeutralRightUp(r);
           }
-          if (this.k === 4) {
+          if (this.k === items.length) {
             resolve();
           } else {
             const d = (r + this.answer) * 1000;
