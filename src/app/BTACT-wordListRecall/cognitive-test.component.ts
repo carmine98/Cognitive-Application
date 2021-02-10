@@ -10,7 +10,6 @@ import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
-
 @Component({
   selector: 'app-cognitive-test',
   templateUrl: './cognitive-test.component.html',
@@ -30,6 +29,8 @@ export class CognitiveTestComponent implements OnInit {
   timer!: number;
 
   private userUrl = 'http://localhost:5000';  // URL to REST API
+
+  microphone!: any;
 
   constructor(private domSanitizer: DomSanitizer, private matDialog: MatDialog, private http: HttpClient) {
     this.nextButton = false;
@@ -61,6 +62,7 @@ export class CognitiveTestComponent implements OnInit {
     this.isRecording = false;
     this.nextButton = true;
     this.record.stop(this.processRecording.bind(this));
+
     this.counter = 0;
   }
 
@@ -92,8 +94,7 @@ export class CognitiveTestComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   errorCallback(error: any) {
-    alert('Please, accept the permission for the microphone and reload the page, else' +
-      'the recording won’t start.');
+    alert('Please, accept the permission for the microphone and reload the page, else the recording won’t start.');
   }
 
   // tslint:disable-next-line:typedef
@@ -114,7 +115,6 @@ export class CognitiveTestComponent implements OnInit {
   }
 
 
-  // tslint:disable-next-line:typedef
   openDialog() {
     this.record.pause();
     this.timer = this.counter;
@@ -133,8 +133,7 @@ export class CognitiveTestComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    const mediaConstraints = {
+    let mediaConstraints = {
       video: false,
       audio: true
     };

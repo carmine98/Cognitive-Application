@@ -38,12 +38,9 @@
         <div *ngIf="testID.invalid && testID.touched" style="text-align: center">Test ID is required.</div>
       </div>
       <br><br>
-      <div class="form-group" align="center">
-        <button color="primary" mat-raised-button type="submit" [disabled]="form.invalid"
-                class="btn btn-lg btn-block btn btn-outline-success">Submit</button>
-        &nbsp;
-        <button color="primary" mat-raised-button [disabled]="!startTest" routerLink="../explain-btact"
-                routerLinkActive="active">Start test</button>
+      <div class="form-group" align="center">&nbsp;
+        <button color="primary" mat-raised-button [disabled]="form.invalid">
+          Start test</button>
       </div>
       <br>
     </form>

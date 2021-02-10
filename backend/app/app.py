@@ -52,23 +52,8 @@ def add_user():
             conn.close()
         
         
-@app.route('/users')
-def users():
-    try:
-        conn = db.get_connection()
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM user")
-        rows = cursor.fetchall()
-        resp = jsonify(rows)
-        resp.status_code = 200
-        cursor.close() 
-        return resp
-    except Exception as e:
-        print(e)
-    finally:
-        conn.close()
-        
 @app.route('/users/<string:id>')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def user(id):
     try:
         conn = db.get_connection()
@@ -98,6 +83,7 @@ def not_found(error=None):
     return resp
         
 @app.route('/uploadAudio', methods = ['GET', 'POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def upload_audio():
     if request.method == 'POST':
         f = request.files['audio_data']
@@ -152,6 +138,7 @@ def upload_audio():
     return 'file uploaded successfully'
 
 @app.route('/uploadSymbolTest', methods = ['GET', 'POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def upload_symbol():
     conn = db.get_connection()
     cursor = conn.cursor()
@@ -197,6 +184,7 @@ def upload_symbol():
     
 
 @app.route('/uploadArrowTest', methods = ['GET', 'POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def upload_arrowtest():
     conn = db.get_connection()
     cursor = conn.cursor()

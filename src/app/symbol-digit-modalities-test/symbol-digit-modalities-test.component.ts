@@ -237,6 +237,13 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const firstTime = sessionStorage.getItem('key');
+    if(!firstTime){
+      sessionStorage.setItem('key','loaded');
+      location.reload();
+    }else {
+      sessionStorage.removeItem('key');
+    }
   }
 
   // tslint:disable-next-line:typedef
@@ -340,5 +347,6 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   finishTest(){
     this.counter = -1;
   }
+
 
 }

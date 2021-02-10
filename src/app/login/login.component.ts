@@ -6,6 +6,7 @@ import { UsersService } from '../user/users.service';
 import { User } from '../user/user.model';
 
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -16,13 +17,12 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
 
   message!: string;
-  startTest!: boolean;
   testIdentifier!: string;
   user!: User;
 
 
-  constructor(public service: UsersService, private snackbar: MatSnackBar) {
-    this.startTest = false;
+  constructor(public service: UsersService, private snackbar: MatSnackBar, private router: Router) {
+    this.message = '';
   }
 
   ngOnInit(): void {
@@ -75,22 +75,20 @@ export class LoginComponent implements OnInit {
     this.testIdentifier = form.value.testID;
     sessionStorage.setItem('testIdentifier', this.testIdentifier);
     data = await this.service.getUser(this.testIdentifier);
-    // @ts-ignore
-    if (data !== null) {
+    if (data === null){
+      this.message = 'Test ID is not valid';
+      this.resetForm(form);
+      this.snackbar.open(this.message, undefined, config);
+    }else {
       this.service.addUser(user).subscribe(response => {
         console.log(response);
+        this.message = 'Information is successfully saved!';
+        this.resetForm(form);
+        this.snackbar.open(this.message, undefined, config);
+        this.router.navigateByUrl('/explain-btact');
       }, error => {
         console.log(error);
       });
-      this.startTest = true;
-      this.message = 'Information is successfully saved!';
-      this.resetForm(form);
-      this.snackbar.open(this.message, undefined, config);
-    } else {
-      this.startTest = false;
-      this.message = 'testID is not valid';
-      this.resetForm(form);
-      this.snackbar.open(this.message, undefined, config);
     }
   }
 

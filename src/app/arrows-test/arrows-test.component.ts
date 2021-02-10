@@ -1004,6 +1004,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerCongruentLeft(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/congruentLeft.png';
@@ -1019,10 +1020,13 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
+
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -1036,6 +1040,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerCongruentRight(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/congruentRight.png';
@@ -1051,10 +1056,13 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
+
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -1068,6 +1076,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerIncongruentLeft(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/incongruentLeft.png';
@@ -1083,9 +1092,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1100,6 +1111,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerIncongruentRight(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/incongruentRight.png';
@@ -1115,9 +1127,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1132,6 +1146,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerNeutralLeft(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/neutralLeft.png';
@@ -1147,9 +1162,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1164,6 +1181,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerNeutralRight(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/neutralRight.png';
@@ -1179,9 +1197,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1208,6 +1228,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerCongruentLeft2(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/congruentLeft.png';
@@ -1223,9 +1244,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1240,6 +1263,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerCongruentRight2(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/congruentRight.png';
@@ -1255,9 +1279,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1272,6 +1298,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerIncongruentLeft2(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/incongruentLeft.png';
@@ -1287,9 +1314,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1304,6 +1333,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerIncongruentRight2(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/incongruentRight.png';
@@ -1319,9 +1349,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1336,6 +1368,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerNeutralLeft2(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/neutralLeft.png';
@@ -1351,9 +1384,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1368,6 +1403,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerNeutralRight2(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/neutralRight.png';
@@ -1383,9 +1419,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1400,6 +1438,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerCongruentLeft3(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/congruentLeft.png';
@@ -1415,9 +1454,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1432,6 +1473,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerCongruentRight3(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/congruentRight.png';
@@ -1447,9 +1489,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1464,6 +1508,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerIncongruentLeft3(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/incongruentLeft.png';
@@ -1479,9 +1524,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1496,6 +1543,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerIncongruentRight3(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/incongruentRight.png';
@@ -1511,9 +1559,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1528,6 +1578,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerNeutralLeft3(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/neutralLeft.png';
@@ -1543,9 +1594,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1560,6 +1613,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerNeutralRight3(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/neutralRight.png';
@@ -1575,9 +1629,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1592,6 +1648,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerCongruentLeft4(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/congruentLeft.png';
@@ -1607,9 +1664,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         // tslint:disable-next-line:no-shadowed-variable
@@ -1625,6 +1684,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerCongruentRight4(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow2') as HTMLImageElement;
     img.src = 'assets/images/congruentRight.png';
@@ -1642,9 +1702,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1662,6 +1724,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerIncongruentLeft4(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow2') as HTMLImageElement;
     img.src = '';
@@ -1679,9 +1742,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1699,6 +1764,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerIncongruentRight4(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow2') as HTMLImageElement;
     img.src = 'assets/images/incongruentRight.png';
@@ -1716,9 +1782,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1736,6 +1804,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerNeutralLeft4(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow') as HTMLImageElement;
     img.src = 'assets/images/neutralLeft.png';
@@ -1753,9 +1822,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1773,6 +1844,7 @@ export class ArrowsTestComponent implements OnInit {
   // tslint:disable-next-line:typedef
   startTimerAnswerNeutralRight4(seconds: number) {
     this.counterAnswer = seconds;
+    this.userAnswer = '';
 
     const img = document.getElementById('arrow2') as HTMLImageElement;
     img.src = 'assets/images/neutralRight.png';
@@ -1790,9 +1862,11 @@ export class ArrowsTestComponent implements OnInit {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
-          alert('right answer');
+          alert('Right answer');
+        }else if (this. userAnswer === ''){
+          alert('Expired time');
         }else {
-          alert('wrong answer');
+          alert('Wrong answer');
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
