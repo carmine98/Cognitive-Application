@@ -1,3 +1,12 @@
+#Prerequites
+
+- Run `npm install` in principal folder
+- Run `pip3 install -r requirements.txt` in `Cognitive-Application/app/` directory 
+- Read docker-compose.yml in backend folder  
+- Run docker-compose.yml with `docker-compose up -d --build`
+- Run backend in `Cognitive-Application/app/` with the following command `python3 app.py`
+- Run all app from principal directory with `npm start`
+
 # CognitiveApplication
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.

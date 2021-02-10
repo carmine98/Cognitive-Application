@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     config.panelClass = ['background-red'];
     const user = new User(form.value.surname, form.value.name, form.value.age, form.value.genre, form.value.testID);
     // @ts-ignore
-    if (user.age <= 18){
+    if (user.age < 18){
       this.resetForm(form);
       this.message = 'You must be at least 18 years old to do the test';
       this.snackbar.open(this.message, undefined, config);

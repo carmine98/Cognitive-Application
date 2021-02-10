@@ -38,7 +38,7 @@ def add_user():
                 sql = "INSERT INTO user (testID, name, surname, age, genre) VALUES (%s, %s, %s, %s, %s)"
                 val = (_testID, _name, _surname, _age, _genre)
                 cursor.execute(sql, val)
-                conn.commit()			
+                conn.commit()
                 resp = jsonify('User added successfully!')
                 resp.status_code = 200
                 cursor.close()
@@ -47,11 +47,32 @@ def add_user():
                 return not_found()
         except Exception as e:
             print(e)
-        finally: 
+        finally:
             cursor.close()
             conn.close()
+<<<<<<< HEAD
         
         
+=======
+
+
+@app.route('/users')
+def users():
+    try:
+        conn = db.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM user")
+        rows = cursor.fetchall()
+        resp = jsonify(rows)
+        resp.status_code = 200
+        cursor.close()
+        return resp
+    except Exception as e:
+        print(e)
+    finally:
+        conn.close()
+
+>>>>>>> 996f76742a064c02a07965b0b024219bd7f4e599
 @app.route('/users/<string:id>')
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def user(id):
@@ -67,10 +88,10 @@ def user(id):
         return resp
     except Exception as e:
         print(e)
-    finally: 
+    finally:
         conn.close()
 
-        
+
 @app.errorhandler(404)
 def not_found(error=None):
     message = {
@@ -81,7 +102,7 @@ def not_found(error=None):
     resp.status_code = 404
 
     return resp
-        
+
 @app.route('/uploadAudio', methods = ['GET', 'POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def upload_audio():
@@ -111,7 +132,7 @@ def upload_audio():
             outFile.close()
             s=[]
             with open(UPLOAD_FOLDER_TEXT + fname1, "r") as myfile:
-                content=myfile.read().split()  
+                content=myfile.read().split()
                 for word in content:
                     if((word in punctuation) or (word in whitespace)) :
                         pass
@@ -131,10 +152,10 @@ def upload_audio():
             conn.commit()
         except Exception as e:
             print(e)
-        finally: 
+        finally:
             cursor.close()
             conn.close()
-        
+
     return 'file uploaded successfully'
 
 @app.route('/uploadSymbolTest', methods = ['GET', 'POST'])
@@ -151,7 +172,7 @@ def upload_symbol():
                 '8', '7', '3', '5', '6', '4', '7', '2', '3', '3', '6', '8', '9', '1', '8', '4', '7', '5',
                 '2', '9', '6', '7', '1', '5', '2', '3', '4', '6', '4', '1', '9', '5', '7', '3', '6', '8',
                 '3', '2', '7', '5', '8', '4', '2', '9', '1', '6', '3', '8', '7', '1', '2', '6', '4', '9', '']
-                
+
         mydict = dict()
 
         for index,value in enumerate(sequence):
@@ -161,12 +182,12 @@ def upload_symbol():
 
         _json = request.get_json()
         print(_json)
-        count = 0 
+        count = 0
         for key in _json:
             n = int(key)
             value = mydict.get(n)
             if value == _json[key]:
-                count = count + 1  
+                count = count + 1
         print(count)
         testID = _json['144']
         sql = "INSERT INTO WRITTEN_SYMBOL (testID, score_test) VALUES (%s, %s)"
@@ -178,10 +199,10 @@ def upload_symbol():
         return resp
     except Exception as e:
         print(e)
-    finally: 
+    finally:
         cursor.close()
         conn.close()
-    
+
 
 @app.route('/uploadArrowTest', methods = ['GET', 'POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
@@ -206,12 +227,11 @@ def upload_arrowtest():
         return resp
     except Exception as e:
         print(e)
-    finally: 
+    finally:
         cursor.close()
         conn.close()
-    
+
 
 
 if __name__ == "__main__":
     app.run()
-    
