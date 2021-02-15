@@ -115,6 +115,7 @@ export class CognitiveTestComponent implements OnInit {
   }
 
 
+  // tslint:disable-next-line:typedef
   openDialog() {
     this.record.pause();
     this.timer = this.counter;
@@ -133,7 +134,7 @@ export class CognitiveTestComponent implements OnInit {
 
 
   ngOnInit(): void {
-    let mediaConstraints = {
+    const mediaConstraints = {
       video: false,
       audio: true
     };

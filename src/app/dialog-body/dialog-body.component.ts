@@ -16,6 +16,7 @@ export class DialogBodyComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // tslint:disable-next-line:typedef
   goSymbol() {
     this.router.navigateByUrl('/symbol');
   }

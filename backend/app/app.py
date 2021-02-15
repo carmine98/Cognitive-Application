@@ -50,11 +50,6 @@ def add_user():
         finally:
             cursor.close()
             conn.close()
-<<<<<<< HEAD
-        
-        
-=======
-
 
 @app.route('/users')
 def users():
@@ -72,7 +67,6 @@ def users():
     finally:
         conn.close()
 
->>>>>>> 996f76742a064c02a07965b0b024219bd7f4e599
 @app.route('/users/<string:id>')
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def user(id):

@@ -88,6 +88,9 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/explain-btact');
       }, error => {
         console.log(error);
+        this.message = 'This Test ID has already been used';
+        this.resetForm(form);
+        this.snackbar.open(this.message, undefined, config);
       });
     }
   }
