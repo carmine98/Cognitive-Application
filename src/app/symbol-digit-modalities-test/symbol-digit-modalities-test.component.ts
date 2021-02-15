@@ -238,9 +238,9 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
 
   ngOnInit(): void {
     const firstTime = sessionStorage.getItem('key');
-    if(!firstTime){
-      sessionStorage.setItem('key','loaded');
-      location.reload();
+    if (!firstTime){
+      sessionStorage.setItem('key', 'loaded');
+      location.assign('/symbol');
     }else {
       sessionStorage.removeItem('key');
     }
