@@ -23,13 +23,13 @@
       <br><br>
       <div class="form-group">
         <input list="genre" name="genre" #Genre="ngModel" [(ngModel)]="user.genre" class="box"
-               placeholder="Genre" (keydown)="false" (click)="resetGenre()" required>
+               placeholder="Gender" (keydown)="false" (click)="resetGenre()" required>
         <datalist id="genre">
-          <option name="Male">Male</option>
-          <option name="Female">Female</option>
+          <option name="Man">Man</option>
+          <option name="Woman">Woman</option>
           <option name="Not Binary">Not Binary</option>
         </datalist>
-        <div *ngIf="Genre.invalid && Genre.touched" style="text-align: center">Genre is required.</div>
+        <div *ngIf="Genre.invalid && Genre.touched" style="text-align: center">Gender is required.</div>
       </div>
       <br><br>
       <div class="form-group">
