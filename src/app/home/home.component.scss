@@ -31,6 +31,70 @@
   transition: .5s ease;
 }
 
+.admin_button {
+  background-color: transparent;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),;
+  transition: .5s ease;
+}
+
 .icon-display {
   transform: scale(2.5);
 }
+
+.icon-display-admin {
+  transform: scale(2.0);
+}
+
+.with-icon {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 7%;
+  position: absolute;
+  top: 90%;
+  left: 1%;
+}
+
+.mat-icon-button{
+  color: white;
+  margin-top: 20%;
+}
+
+.mat-form-field {
+  text-align: left;
+  width: 3.5%;
+}
+
+::ng-deep .mat-select-value-text {
+  color: white;
+}
+
+::ng-deep .mat-option-text{
+  color: black;
+}
+
+::ng-deep .mat-select-arrow-wrapper.mat-focused{
+  background-color: white;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: white;
+}
+
+::ng-deep .mat-select-arrow {
+  color: white;
+}
+
+::ng-deep .mat-select-arrow.mat-focused {
+  color: white;
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: white;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 1px;
+  background-color: white;
+}
+
+

@@ -2,3 +2,18 @@
   <h1 class="title">Cognitive Test</h1>
   <button mat-fab class="play_button" (click)="goToLogin()"><mat-icon class="icon-display">play_circle_outline</mat-icon></button>
 </div>
+
+<mat-form-field>
+  <mat-select [(value)]="selectedLanguage">
+    <mat-option value="eng">ENG</mat-option>
+    <mat-option value="ita">ITA</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="with-icon">
+  <button mat-fab class="admin_button" (click)="setAdmin()"><mat-icon class="icon-display-admin">admin_panel_settings</mat-icon></button>
+  <div class="form-group" *ngIf="admin">
+    <input style="margin-top: 8%; font-size: large" type="password" placeholder="Insert Password" id="adminPassword" (keydown.enter)="goToAdmin()" required>
+  </div>
+  <button mat-icon-button *ngIf="admin" (click)="goToAdmin()">Login as Administrator</button>
+</div>

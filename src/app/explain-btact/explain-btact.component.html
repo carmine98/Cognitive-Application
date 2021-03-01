@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!isItalian">
   <p class="explain-text">
     <br>
     You are going to hear a list of 15 words. Listen carefully. When the list is finished, you are to repeat as many of the words as you can remember. It doesn't matter in what order you repeat them. Just try to remember as many as you can. You will hear each word only one time. You will have up to one and a half minutes (90 seconds).
@@ -8,15 +8,34 @@
     Please do not use a paper and pencil or other instruments. We suggest that you close your eyes while you are listening to the audio to help you concentrate. NOTE: On the pages where your audio response is being recorded, the page will automatically progress after the allotted time has finished.
   </p>
 </div>
+<div *ngIf="isItalian">
+  <p class="explain-text">
+    <br>
+    Ascolterai un elenco di 15 parole. Ascolta attentamente. Quando l'elenco è finito, devi ripetere quante più parole riesci a ricordare. Non importa in quale ordine li ripeti. Cerca solo di ricordarne il maggior numero possibile. Ascolterai ogni parola solo una volta. Avrai fino a un minuto e mezzo (90 secondi).
+    <br><br>
+    Si prega di premere "Riproduci" di seguito per ascoltare l'audio. Quando l'audio è terminato, fare clic sul pulsante "Avanti" per passare alla pagina successiva in cui la registrazione delle risposte inizierà dopo 1 secondo.
+    <br><br>
+    Si prega di non utilizzare carta e matita o altri strumenti. Ti suggeriamo di chiudere gli occhi mentre ascolti l'audio per aiutarti a concentrarti. NOTA: sulle pagine in cui viene registrata la risposta audio, la pagina avanzerà automaticamente al termine del tempo assegnato.
+  </p>
+</div>
 <br><br>
-<div style="text-align:center;">
+<div style="text-align:center;" *ngIf="!isItalian">
     <button mat-raised-button (click)="playAudio()">Play</button>&nbsp;&nbsp;
     <button mat-raised-button routerLink="../btact" routerLinkActive="active" [disabled]="!audioFinished" (click)="stopAudio()">Next</button>
 </div>
+<div style="text-align:center;" *ngIf="isItalian">
+  <button mat-raised-button (click)="playAudio()">Riproduci</button>&nbsp;&nbsp;
+  <button mat-raised-button routerLink="../btact" routerLinkActive="active" [disabled]="!audioFinished" (click)="stopAudio()">Avanti</button>
+</div>
   <br><br>
-<div>
+<div *ngIf="!isItalian">
   <p style="text-align: center; font-size: large; color: red">
     Please do not refresh/reload the page after the recording has begun.
+  </p>
+</div>
+<div *ngIf="isItalian">
+  <p style="text-align: center; font-size: large; color: red">
+    Per piacere non ricaricare la pagina dopo che è iniziata la registrazione.
   </p>
 </div>
 

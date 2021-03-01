@@ -9,7 +9,17 @@ import { Router } from '@angular/router';
 })
 export class ExplainArrowsTestComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  lang!: string | null;
+  isItalian!: boolean;
+
+  constructor(private router: Router) {
+    this.lang = sessionStorage.getItem('lang');
+    if (this.lang === 'ita'){
+      this.isItalian = true;
+    }else{
+      this.isItalian = false;
+    }
+  }
 
   ngOnInit(): void {
   }

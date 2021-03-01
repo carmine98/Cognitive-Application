@@ -17,6 +17,13 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
     this.audioFinished = false;
     this.nextButton = false;
     this.audioButton = true;
+    this.time = 0;
+    this.lang = sessionStorage.getItem('lang');
+    if (this.lang === 'ita'){
+      this.isItalian = true;
+    }else{
+      this.isItalian = false;
+    }
   }
 
   audioFinished: boolean;
@@ -26,6 +33,10 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
   counter!: number;
   id!: string | null;
   input!: any;
+  time!: number;
+
+  lang!: string | null;
+  isItalian!: boolean;
 
   // tslint:disable-next-line:typedef
   value1: any;
@@ -248,6 +259,7 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   createObject(){
+    const time = 120 - this.time;
     const sequence = [];
 
     this.id = sessionStorage.getItem('testIdentifier');
@@ -280,7 +292,7 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
       this.value123, this.value124, this.value125, this.value126, this.value127,
       this.value128, this.value129, this.value130, this.value131, this.value132,
       this.value133, this.value134, this.value135, this.value136, this.value137,
-      this.value138, this.value139, this.value140, this.value141, this.value142, this.value143, this.value144, this.id);
+      this.value138, this.value139, this.value140, this.value141, this.value142, this.value143, this.value144, this.id, time);
 
     const prova = Object.assign({}, sequence);
     console.log(prova);
@@ -317,15 +329,18 @@ export class SymbolDigitModalitiesTestComponent implements OnInit {
 
     const interval = setInterval(() => {
       console.log(this.counter);
+      if (this.counter > 0){
+        this.time = this.counter;
+      }
       // @ts-ignore
       this.counter--;
 
       // @ts-ignore
       if (this.counter < 0 ) {
+        this.createObject();
         clearInterval(interval);
         this.audioFinished = false;
         this.nextButton = true;
-        this.createObject();
         this.router.navigateByUrl('/explain-arrows');
       }
     }, 1000);

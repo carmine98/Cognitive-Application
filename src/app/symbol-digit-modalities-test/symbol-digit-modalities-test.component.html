@@ -1,13 +1,23 @@
-<div>
+<div *ngIf="!isItalian">
     <br>
     Now when you progress to the full task, you will be writing the appropriate number for each symbol. This will be scored by our research team upon completion of this task. When you begin the task, you will see similar rows as you did in the practice set. We want you to work as quickly as you can without skipping any boxes or making mistakes. Continue until the boxes go grey. If you make a mistake, you can return on the corresponding box.
     <br><br>
     When you click on "Go!" button, you will hear a countdown with a final “ping” sound to indicate that you should begin writing. Are you ready?
 </div>
+<div *ngIf="isItalian">
+  <br>
+  Ora, quando avanzi all'attività completa, scriverai il numero appropriato per ogni simbolo. Questo verrà valutato dal nostro team di ricerca al completamento di questo compito. Quando inizi l'attività, vedrai righe simili a quelle del set di esercitazioni. Vogliamo che tu lavori il più velocemente possibile senza saltare alcuna casella o commettere errori. Continua finché le caselle non diventano grigie. Se commetti un errore, puoi tornare sulla casella corrispondente.
+  <br><br>
+  Quando fai clic su "Vai!" , sentirai un conto alla rovescia con un "ping" finale per indicare che dovresti iniziare a scrivere. Siete pronti?
+</div>
 <br><br>
-<div style="text-align:center;">
+<div style="text-align:center;" *ngIf="!isItalian">
   <button mat-raised-button (click)="audio()" [disabled]="!audioButton">Go</button>&nbsp;&nbsp;
   <button mat-raised-button routerLink="../btact" routerLinkActive="active" [disabled]="!nextButton">Next</button>
+</div>
+<div style="text-align:center;" *ngIf="isItalian">
+  <button mat-raised-button (click)="audio()" [disabled]="!audioButton">Vai</button>&nbsp;&nbsp;
+  <button mat-raised-button routerLink="../btact" routerLinkActive="active" [disabled]="!nextButton">Avanti</button>
 </div>
 <br>
 <div style="text-align: center">

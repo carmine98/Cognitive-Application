@@ -13,8 +13,17 @@ export class ExplainBTACTComponent implements OnInit {
   // @ts-ignore
   audio = new Audio();
 
+  lang!: string | null;
+  isItalian!: boolean;
+
   constructor() {
     this.audioFinished = false;
+    this.lang = sessionStorage.getItem('lang');
+    if (this.lang === 'ita'){
+      this.isItalian = true;
+    }else{
+      this.isItalian = false;
+    }
   }
 
   ngOnInit(): void {

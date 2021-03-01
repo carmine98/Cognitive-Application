@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center; padding-top: 15%">
+<div style="text-align:center; padding-top: 15%" *ngIf="!isItalian">
   <h1>
     <button mat-raised-button *ngIf="!permission">The record is non started yet</button>
     <button mat-raised-button *ngIf="isRecording">Now is recording</button>
@@ -8,11 +8,26 @@
 </div>
 <br>
 <div style="text-align: center">
-  <p style="text-align: center; font-size: large; color: red">
+  <p style="text-align: center; font-size: large; color: red" *ngIf="!isItalian">
     Please do not refresh/reload the page after the recording has begun.
   </p>
   <br>
-  <button mat-raised-button [disabled]="!isRecording" (click)="openDialog()">Stop</button>&nbsp;&nbsp;
+  <button *ngIf="!isItalian" mat-raised-button [disabled]="!isRecording" (click)="openDialog()">Stop</button>&nbsp;&nbsp;
+</div>
+<div style="text-align:center; padding-top: 15%" *ngIf="isItalian">
+  <h1>
+    <button mat-raised-button *ngIf="!permission">La registrazione non è ancora iniziata</button>
+    <button mat-raised-button *ngIf="isRecording">Sto registrando</button>
+    <button mat-raised-button *ngIf="!isRecording && permission">La registrazione è finita!</button>
+  </h1>
+</div>
+<br>
+<div style="text-align: center">
+  <p style="text-align: center; font-size: large; color: red" *ngIf="isItalian">
+    Per piacere non ricaricare la pagina dopo che la registrazione sia iniziata.
+  </p>
+  <br>
+  <button *ngIf="isItalian" mat-raised-button [disabled]="!isRecording" (click)="openDialog()">Ferma la registrazione</button>&nbsp;&nbsp;
 </div>
 <br>
 <br>

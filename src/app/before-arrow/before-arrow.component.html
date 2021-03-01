@@ -1,6 +1,13 @@
-<div style="padding-top: 20%">
+<div style="padding-top: 20%" *ngIf="!isItalian">
   <p class="explain-text" style="text-align: center; font-size: large">
     You have done the tutorial, click the button below to start test
   </p>
   <button mat-raised-button class="buttonCenter" (click)="goToTest()">Play</button>
+</div>
+
+<div style="padding-top: 20%" *ngIf="isItalian">
+  <p class="explain-text" style="text-align: center; font-size: large">
+    Hai finito il tutorial, premi il pulsante sotto per iniziare il test
+  </p>
+  <button mat-raised-button class="buttonCenter" (click)="goToTest()">Gioca</button>
 </div>

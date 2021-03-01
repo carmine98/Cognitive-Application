@@ -1,0 +1,15 @@
+<p class="text">
+  Insert New TestID
+</p>
+
+<div>
+  <input class="inputText" type="text" placeholder="Insert TestID" id="testID" (input)="onInput()" required> <br>
+  <button class="insertButton" mat-raised-button id="button" [disabled]="!button" (click)="insertTestID()">Insert</button>
+</div>
+
+<div class="with-icon">
+  <button mat-fab class="transparent_button" (click)="goToAdmin()"><mat-icon class="icon-display">admin_panel_settings</mat-icon></button>
+
+  <button mat-fab class="transparent_button" (click)="goToHome()"><mat-icon class="icon-display">home</mat-icon></button>
+</div>
+

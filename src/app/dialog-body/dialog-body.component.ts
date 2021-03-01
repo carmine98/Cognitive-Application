@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dialog-body',
@@ -11,14 +11,19 @@ import {Router} from "@angular/router";
 })
 export class DialogBodyComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DialogBodyComponent>, private router: Router) { }
+  lang!: string | null;
+  isItalian!: boolean;
 
-  ngOnInit(): void {
+  constructor(public dialogRef: MatDialogRef<DialogBodyComponent>, private router: Router) {
+    this.lang = sessionStorage.getItem('lang');
+    if (this.lang === 'ita'){
+      this.isItalian = true;
+    }else{
+      this.isItalian = false;
+    }
   }
 
-  // tslint:disable-next-line:typedef
-  goSymbol() {
-    this.router.navigateByUrl('/symbol');
+  ngOnInit(): void {
   }
 
 

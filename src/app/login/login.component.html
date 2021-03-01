@@ -1,7 +1,8 @@
 <div class="background">
-  <h1 class="login-title">Introduce Yourself!</h1>
+  <h1 *ngIf="!isItalian" class="login-title">Introduce Yourself!</h1>
+  <h2 *ngIf="isItalian" class="login-title">Presentati!</h2>
 
-  <div align="center">
+  <div align="center" *ngIf="!isItalian">
     <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
       <div class="form-group">
         <input type="text" name="surname" #surName="ngModel" [(ngModel)]="user.surname" class="box"
@@ -41,6 +42,51 @@
       <div class="form-group" align="center">&nbsp;
         <button color="primary" mat-raised-button [disabled]="form.invalid">
           Start test</button>
+      </div>
+      <br>
+    </form>
+  </div>
+
+  <div align="center" *ngIf="isItalian">
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+      <div class="form-group">
+        <input type="text" name="surname" #surName="ngModel" [(ngModel)]="user.surname" class="box"
+               placeholder="Cognome" required>
+        <div *ngIf="surName.invalid && surName.touched" style="text-align: center">Il Cognome è obbligatorio.</div>
+      </div>
+      <br><br>
+      <div class="form-group">
+        <input type="text" name="name" #Name="ngModel" [(ngModel)]="user.name" class="box"
+               placeholder="Nome" required>
+        <div *ngIf="Name.invalid && Name.touched" style="text-align: center">Il Nome è obbligatorio.</div>
+      </div>
+      <br><br>
+      <div class="form-group">
+        <input type="number" name="age" #Age="ngModel" [(ngModel)]="user.age" class="box"
+               placeholder="Età" min="18" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" required>
+        <div *ngIf="Age.invalid && Age.touched" style="text-align: center">L'età è obbligatoria.</div>
+      </div>
+      <br><br>
+      <div class="form-group">
+        <input list="genre1" name="genre" #Genre="ngModel" [(ngModel)]="user.genre" class="box"
+               placeholder="Genere" (keydown)="false" (click)="resetGenre()" required>
+        <datalist id="genre1">
+          <option name="Man">Man</option>
+          <option name="Woman">Woman</option>
+          <option name="Not Binary">Not Binary</option>
+        </datalist>
+        <div *ngIf="Genre.invalid && Genre.touched" style="text-align: center">Il Genere è obbligatorio.</div>
+      </div>
+      <br><br>
+      <div class="form-group">
+        <input name="testID" #testID="ngModel" [(ngModel)]="user.testID" class="box"
+               placeholder="Test ID" required>
+        <div *ngIf="testID.invalid && testID.touched" style="text-align: center">Il Test ID è obbligatorio.</div>
+      </div>
+      <br><br>
+      <div class="form-group" align="center">&nbsp;
+        <button color="primary" mat-raised-button [disabled]="form.invalid">
+          Inizia il test</button>
       </div>
       <br>
     </form>

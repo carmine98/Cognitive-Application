@@ -1,12 +1,14 @@
 import pymysql
 import db
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_cors import CORS, cross_origin
 import os
 import wave
 import contextlib
 import speech_recognition as sr
 from string import punctuation, whitespace
+import io
+import csv
 
 UPLOAD_FOLDER_AUDIO = 'BTACT/audio/'
 UPLOAD_FOLDER_TEXT = 'BTACT/text/'
@@ -17,7 +19,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_AUDIO
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
 words = ['drum', 'curtain', 'bell', 'coffee', 'school', 'parent', 'moon', 'garden', 'hat', 'farmer', 'nose', 'turkey', 'color', 'house', 'river']
-
 
 @app.route('/add', methods=['OPTIONS','POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
@@ -184,8 +185,9 @@ def upload_symbol():
                 count = count + 1
         print(count)
         testID = _json['144']
-        sql = "INSERT INTO WRITTEN_SYMBOL (testID, score_test) VALUES (%s, %s)"
-        val = (testID, count)
+        time = _json['145']
+        sql = "INSERT INTO WRITTEN_SYMBOL (testID, score_test, timeWritten) VALUES (%s, %s, %s)"
+        val = (testID, count, time)
         cursor.execute(sql, val)
         conn.commit()
         resp = jsonify('Data received succesfull')
@@ -225,7 +227,78 @@ def upload_arrowtest():
         cursor.close()
         conn.close()
 
+@app.route('/insertNewTestID', methods = ['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def insert():
+    conn = db.get_connection()
+    cursor = conn.cursor()
+    try:
+        _json = request.get_json()
+        print(_json)
+        testId = _json['0']
+        sql = "INSERT INTO TEST_ID (testID) VALUES (%s)"
+        val = [(testId)]
+        cursor.execute(sql, val)
+        conn.commit()
+        resp = jsonify('Data received succesfull')
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
 
+@app.route('/report', methods = ['POST', 'GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def report():
+    conn = db.get_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        _json = request.get_json()
+        print(_json)
+        testId = _json['0']
+        cursor.execute("SELECT * FROM user INNER JOIN ARROW_TEST INNER JOIN BTACT INNER JOIN WRITTEN_SYMBOL WHERE user.testID = %s AND user.testID = WRITTEN_SYMBOL.testID AND user.testID = BTACT.testID AND user.testID = ARROW_TEST.testID", (testId,))
+        row = cursor.fetchone()
+        print(row)
+        resp = jsonify(row)
+        resp.status_code = 200
+        cursor.close()
+        return resp
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close() 
+        conn.close() 
+
+@app.route('/download', methods = ['POST', 'GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def download():
+    conn = db.get_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM user INNER JOIN ARROW_TEST INNER JOIN BTACT INNER JOIN WRITTEN_SYMBOL WHERE user.testID = WRITTEN_SYMBOL.testID AND user.testID = BTACT.testID AND user.testID = ARROW_TEST.testID")
+        result = cursor.fetchall()
+
+        output = io.StringIO()
+        writer = csv.writer(output)
+   
+        line = ['testID, name, surname, age, genre, path_audio, time_BTACT, path_text, score_BTACT, time_Arrow, score_Arrow, score_Symbol, time_Symbol']
+        writer.writerow(line)
+ 
+        for row in result:
+            print(row)
+            line = [row['testID'] + ';' + row['name'] + ';' + row['surname'] + ';' + str(row['age']) + ';' + row['genre'] + ';' + row['path_audio'] + ';' + str(row['time']) + ';' + row['path_text'] + ';' + str(row['score']) + ';' + str(row['RT_total']) + ';' + str(row['totalScore']) + ';' + str(row['score_test']) + ';' + str(row['timeWritten'])]
+            writer.writerow(line)
+ 
+        output.seek(0)
+   
+        return Response(output, mimetype="text/csv", headers={"Content-Disposition":"attachment;filename=db.csv"})
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close() 
+        conn.close()           
 
 if __name__ == "__main__":
     app.run()

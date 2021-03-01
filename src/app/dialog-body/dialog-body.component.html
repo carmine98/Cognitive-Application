@@ -1,10 +1,20 @@
-<h2 mat-dialog-title>Stop Recording</h2>
+<h2 *ngIf="!isItalian" mat-dialog-title>Stop Recording</h2>
+<h2 *ngIf="isItalian" mat-dialog-title>Ferma la registrazione</h2>
 
-<mat-dialog-content>
+<mat-dialog-content *ngIf="!isItalian">
   <p>Do you want to continue the test?</p>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
+<mat-dialog-content *ngIf="isItalian">
+  <p>Vuoi continuare il test?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" *ngIf="!isItalian">
   <button class="mat-raised-button" [mat-dialog-close]="false">Continue</button>&nbsp;&nbsp;
-  <button class="mat-raised-button" [mat-dialog-close]="true" (click)="goSymbol()">Stop</button>
+  <button class="mat-raised-button" [mat-dialog-close]="true">Stop</button>
+</mat-dialog-actions>
+
+<mat-dialog-actions align="end" *ngIf="isItalian">
+  <button class="mat-raised-button" [mat-dialog-close]="false">Continua</button>&nbsp;&nbsp;
+  <button class="mat-raised-button" [mat-dialog-close]="true">Finisci il test</button>
 </mat-dialog-actions>

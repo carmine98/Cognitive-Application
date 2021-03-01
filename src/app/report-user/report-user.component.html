@@ -1,0 +1,75 @@
+<p class="text">
+  Search TestID
+</p>
+
+<div>
+  <input class="inputText" type="text" placeholder="Insert TestID" id="testID" (input)="onInput()" required> <br>
+  <button class="insertButton" mat-raised-button id="button" [disabled]="!button" (click)="searchUser()">Insert</button>
+</div>
+
+<div>
+  <div class="user">
+    <p class="text2">
+      Partecipant
+    </p>
+    <div style="text-align: center">
+      Name: <input class="inputBox" type="text" id="name" required>
+    </div>
+    <div style="text-align: center">
+      Surname: <input class="inputBox" type="text" id="surname" required>
+    </div>
+    <div style="text-align: center">
+      Age: <input class="inputBox" type="text" id="age" required>
+    </div>
+    <div style="text-align: center">
+      Gender: <input class="inputBox" type="text" id="gender" required>
+    </div>
+  </div>
+  <div class="btact">
+    <p class="text2">
+      BTACT
+    </p>
+    <div style="text-align: center">
+      Audio path: <input class="inputBox" type="text" id="audio" required>
+    </div>
+    <div style="text-align: center">
+      Text path: <input class="inputBox" type="text" id="text" required>
+    </div>
+    <div style="text-align: center">
+      Time: <input class="inputBox" type="text" id="timeBTACT" required>
+    </div>
+    <div style="text-align: center">
+      Score: <input class="inputBox" type="text" id="scoreBTACT" required>
+    </div>
+  </div>
+  <div class="written">
+    <p class="text2">
+      SYMBOL DIGIT
+    </p>
+    <br><br>
+    <div style="text-align: center">
+      Time: <input class="inputBox" type="text" id="timeSY" required>
+    </div>
+    <div style="text-align: center">
+      Score: <input class="inputBox" type="text" id="scoreSY" required>
+    </div>
+  </div>
+  <div class="ant">
+    <p class="text2">
+      ANT
+    </p>
+    <br><br>
+    <div style="text-align: center">
+      Time: <input class="inputBox" type="text" id="timeANT" required>
+    </div>
+    <div style="text-align: center">
+      Score: <input class="inputBox" type="text" id="scoreANT" required>
+    </div>
+  </div>
+</div>
+
+<div class="with-icon">
+  <button mat-fab class="transparent_button" (click)="goToAdmin()"><mat-icon class="icon-display">admin_panel_settings</mat-icon></button>
+
+  <button mat-fab class="transparent_button" (click)="goToHome()"><mat-icon class="icon-display">home</mat-icon></button>
+</div>

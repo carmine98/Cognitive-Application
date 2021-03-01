@@ -1,0 +1,35 @@
+.icon-display-admin {
+  transform: scale(2.5);
+}
+
+.with-icon {
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 7%;
+}
+
+.text{
+  text-align: left;
+  color: black;
+  font-size: 50px;
+  font-family: "Courier", serif;
+}
+
+.positionButton{
+  position: absolute;
+  top: 40%;
+  left: 43%;
+  text-align: center;
+}
+
+.mat-raised-button{
+  background: black;
+  font-family: "Courier", serif;
+  text-align: center;
+  color: #FFFFFF;
+  width: 100%;
+}
+

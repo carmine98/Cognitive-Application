@@ -8,6 +8,7 @@ import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -30,10 +31,18 @@ export class CognitiveTestComponent implements OnInit {
 
   private userUrl = 'http://localhost:5000';  // URL to REST API
 
-  microphone!: any;
+  lang!: string | null;
+  isItalian!: boolean;
+  private urlAPI!: string;
 
-  constructor(private domSanitizer: DomSanitizer, private matDialog: MatDialog, private http: HttpClient) {
+  constructor(private domSanitizer: DomSanitizer, private matDialog: MatDialog, private http: HttpClient, private router: Router) {
     this.nextButton = false;
+    this.lang = sessionStorage.getItem('lang');
+    if (this.lang === 'ita'){
+      this.isItalian = true;
+    }else{
+      this.isItalian = false;
+    }
   }
   // tslint:disable-next-line:typedef
   startRecording() {
@@ -62,39 +71,40 @@ export class CognitiveTestComponent implements OnInit {
     this.isRecording = false;
     this.nextButton = true;
     this.record.stop(this.processRecording.bind(this));
-
-    this.counter = 0;
   }
 
   // tslint:disable-next-line:typedef
   public stopRecordingButton() {
     this.isRecording = false;
     this.record.stop();
-    this.counter = 0;
+    this.counter = -1;
   }
 
 
   // tslint:disable-next-line:typedef
   processRecording(blob: any) {
-    // @ts-ignore
-    this.urls.push(URL.createObjectURL(blob));
 
     this.id = sessionStorage.getItem('testIdentifier');
     const filename = this.id;
-    const url = `${this.userUrl}/uploadAudio`;
+    this.urlAPI = `${this.userUrl}/uploadAudio`;
     const fd = new FormData();
     // @ts-ignore
     fd.append('audio_data', blob, filename);
-    this.http.post(url, fd).subscribe(response => {
+    this.http.post(this.urlAPI, fd).subscribe(response => {
       console.log(response);
     }, error => {
       console.log(error);
     });
+    this.router.navigateByUrl('/symbol');
   }
 
   // tslint:disable-next-line:typedef
   errorCallback(error: any) {
-    alert('Please, accept the permission for the microphone and reload the page, else the recording won’t start.');
+    if (this.lang === 'ita'){
+      alert('Per piacere, accetta i permessi per il microfono e ricarica la pagine, altrimenti la registrazione non partirà');
+    }else{
+      alert('Please, accept the permission for the microphone and reload the page, else the recording won’t start.');
+    }
   }
 
   // tslint:disable-next-line:typedef

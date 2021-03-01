@@ -17,7 +17,16 @@ export class ArrowsTestComponent implements OnInit {
   cue1: boolean;
   cue2: boolean;
 
+  lang!: string | null;
+  isItalian!: boolean;
+
   constructor(private router: Router) {
+    this.lang = sessionStorage.getItem('lang');
+    if (this.lang === 'ita'){
+      this.isItalian = true;
+    }else{
+      this.isItalian = false;
+    }
     this.cue1 = false;
     this.cue2 = false;
     this.answer = 1.7;
@@ -1019,12 +1028,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
 
         // tslint:disable-next-line:no-shadowed-variable
@@ -1055,12 +1074,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
 
         // tslint:disable-next-line:no-shadowed-variable
@@ -1091,12 +1120,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1126,12 +1165,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1161,12 +1210,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1196,12 +1255,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1243,12 +1312,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1278,12 +1357,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1313,12 +1402,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1348,12 +1447,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1383,12 +1492,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1418,12 +1537,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1453,12 +1582,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1488,12 +1627,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1523,12 +1672,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1558,12 +1717,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1593,12 +1762,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1628,12 +1807,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1663,12 +1852,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         // tslint:disable-next-line:no-shadowed-variable
@@ -1701,12 +1900,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1741,12 +1950,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1781,12 +2000,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1820,13 +2049,22 @@ export class ArrowsTestComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
-        // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1861,12 +2099,22 @@ export class ArrowsTestComponent implements OnInit {
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
         // tslint:disable-next-line:no-shadowed-variable
-        if (this.userAnswer === congruent){
-          alert('Right answer');
-        }else if (this. userAnswer === ''){
-          alert('Expired time');
-        }else {
-          alert('Wrong answer');
+        if (this.lang === 'ita'){
+          if (this.userAnswer === congruent){
+            alert('Risposta giusta');
+          }else if (this. userAnswer === ''){
+            alert('Tempo scaduto');
+          }else {
+            alert('Risposta sbagliata');
+          }
+        }else{
+          if (this.userAnswer === congruent){
+            alert('Right answer');
+          }else if (this. userAnswer === ''){
+            alert('Time is up');
+          }else {
+            alert('Wrong answer');
+          }
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -1880,5 +2128,4 @@ export class ArrowsTestComponent implements OnInit {
       }
     }, 100);
   }
-
 }
