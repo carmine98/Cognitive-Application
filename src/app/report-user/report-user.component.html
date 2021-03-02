@@ -12,16 +12,16 @@
     <p class="text2">
       Partecipant
     </p>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%;">
       Name: <input class="inputBox" type="text" id="name" required>
     </div>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%;">
       Surname: <input class="inputBox" type="text" id="surname" required>
     </div>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%;">
       Age: <input class="inputBox" type="text" id="age" required>
     </div>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%;">
       Gender: <input class="inputBox" type="text" id="gender" required>
     </div>
   </div>
@@ -29,16 +29,16 @@
     <p class="text2">
       BTACT
     </p>
-    <div style="text-align: center">
-      Audio path: <input class="inputBox" type="text" id="audio" required>
+    <div style="text-align: center; padding-top: 2%">
+      <button mat-raised-button [disabled]="!buttonsDownload" (click)="downloadAudio()">Download Audio</button>
+    </div><br>
+    <div style="text-align: center;">
+      <button mat-raised-button [disabled]="!buttonsDownload" (click)="downloadText()">Download Text &nbsp;</button>
     </div>
-    <div style="text-align: center">
-      Text path: <input class="inputBox" type="text" id="text" required>
-    </div>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%;">
       Time: <input class="inputBox" type="text" id="timeBTACT" required>
     </div>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%;">
       Score: <input class="inputBox" type="text" id="scoreBTACT" required>
     </div>
   </div>
@@ -47,10 +47,10 @@
       SYMBOL DIGIT
     </p>
     <br><br>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%; ">
       Time: <input class="inputBox" type="text" id="timeSY" required>
     </div>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%; ">
       Score: <input class="inputBox" type="text" id="scoreSY" required>
     </div>
   </div>
@@ -59,10 +59,10 @@
       ANT
     </p>
     <br><br>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%; ">
       Time: <input class="inputBox" type="text" id="timeANT" required>
     </div>
-    <div style="text-align: center">
+    <div style="text-align: left; margin-left: 5%; ">
       Score: <input class="inputBox" type="text" id="scoreANT" required>
     </div>
   </div>

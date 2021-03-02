@@ -1,6 +1,6 @@
 import pymysql
 import db
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify, Response, send_file
 from flask_cors import CORS, cross_origin
 import os
 import wave
@@ -16,6 +16,7 @@ UPLOAD_FOLDER_TEXT = 'BTACT/text/'
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_AUDIO
+app.config['UPLOAD_FOLDER_TEXT'] = UPLOAD_FOLDER_TEXT
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
 words = ['drum', 'curtain', 'bell', 'coffee', 'school', 'parent', 'moon', 'garden', 'hat', 'farmer', 'nose', 'turkey', 'color', 'house', 'river']
@@ -299,6 +300,55 @@ def download():
     finally:
         cursor.close() 
         conn.close()           
+
+@app.route('/downloadAudio/<string:id>', methods = ['GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def download_audio(id):
+    conn = db.get_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        testId = id
+        print(testId)
+        cursor.execute("SELECT path_audio FROM BTACT WHERE BTACT.testID = %s", (testId,))
+        result = cursor.fetchall()
+        print(result)
+        path = result[0]
+        final_path = path['path_audio']
+        print(final_path)
+        r = sr.Recognizer()
+        with sr.AudioFile(app.config['UPLOAD_FOLDER'] + testId + '.wav') as source:
+            # listen for the data (load audio to memory)
+            output = r.record(source)
+            output.seek(0)
+        return Response(output, mimetype="audio/wav", headers={"Content-Disposition":"attachment;filename=audio.wav"})
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close() 
+        conn.close()     
+
+@app.route('/downloadText/<string:id>', methods = ['GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def download_text(id):
+    conn = db.get_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        testId = id
+        print(testId)
+        cursor.execute("SELECT path_text FROM BTACT WHERE BTACT.testID = %s", (testId,))
+        result = cursor.fetchall()
+        print(result)
+        path = result[0]
+        final_path = path['path_text']
+        print(final_path)
+        output = open(final_path, "r")
+        output.seek(0)
+        return Response(output, mimetype="text/txt", headers={"Content-Disposition":"attachment;filename=text.txt"})
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close() 
+        conn.close()      
 
 if __name__ == "__main__":
     app.run()
