@@ -26,9 +26,9 @@ const routes: Routes = [
   { path: 'arrows-test', component: ArrowsTestRealComponent },
   { path: 'before', component: BeforeArrowComponent },
   { path: 'final', component: FinalPageComponent},
-  { path: 'admin', component: AdminComponent, /*canActivate: [AuthGuard]*/},
-  { path: 'insert', component: InsertNewTestIDComponent, /*canActivate: [AuthGuard]*/},
-  {path: 'report', component: ReportUserComponent, /*canActivate: [AuthGuard]*/}
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+  { path: 'insert', component: InsertNewTestIDComponent, canActivate: [AuthGuard]},
+  {path: 'report', component: ReportUserComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
