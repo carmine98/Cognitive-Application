@@ -63,7 +63,7 @@ export class ReportUserComponent implements OnInit {
       }else {
         this.dataSource = Object.assign({}, response);
         this.buttonsDownload = true;
-        (document.getElementById('testID') as HTMLInputElement).value = '';
+        // (document.getElementById('testID') as HTMLInputElement).value = '';
         (document.getElementById('name') as HTMLInputElement).value = this.dataSource.name;
         (document.getElementById('surname') as HTMLInputElement).value = this.dataSource.surname;
         (document.getElementById('age') as HTMLInputElement).value = this.dataSource.age;

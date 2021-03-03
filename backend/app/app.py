@@ -9,6 +9,7 @@ import speech_recognition as sr
 from string import punctuation, whitespace
 import io
 import csv
+from pathlib import Path
 
 UPLOAD_FOLDER_AUDIO = 'BTACT/audio/'
 UPLOAD_FOLDER_TEXT = 'BTACT/text/'
@@ -315,12 +316,10 @@ def download_audio(id):
         path = result[0]
         final_path = path['path_audio']
         print(final_path)
-        r = sr.Recognizer()
-        with sr.AudioFile(app.config['UPLOAD_FOLDER'] + testId + '.wav') as source:
-            # listen for the data (load audio to memory)
-            output = r.record(source)
-            output.seek(0)
-        return Response(output, mimetype="audio/wav", headers={"Content-Disposition":"attachment;filename=audio.wav"})
+        root = Path(__file__).parent.parent
+        audio_path = os.path.join(root, final_path)
+        print(audio_path)
+        return send_file(audio_path, mimetype="audio/wav", as_attachment=True, attachment_filename='audio.wav')
     except Exception as e:
         print(e)
     finally:
