@@ -29,17 +29,17 @@
     <p class="text2">
       BTACT
     </p>
-    <div style="text-align: center; padding-top: 2%">
-      <button mat-raised-button [disabled]="!buttonsDownload" (click)="downloadAudio()">Download Audio</button>
-    </div><br>
-    <div style="text-align: center;">
-      <button mat-raised-button [disabled]="!buttonsDownload" (click)="downloadText()">Download Text &nbsp;</button>
-    </div>
     <div style="text-align: left; margin-left: 5%;">
       Time: <input class="inputBox" type="text" id="timeBTACT" required>
     </div>
     <div style="text-align: left; margin-left: 5%;">
       Score: <input class="inputBox" type="text" id="scoreBTACT" required>
+    </div>
+    <div style="text-align: center; padding-top: 4%">
+      <button mat-raised-button [disabled]="!buttonsDownload" (click)="downloadAudio()">Download Audio</button>
+    </div><br>
+    <div style="text-align: center;">
+      <button mat-raised-button [disabled]="!buttonsDownload" (click)="downloadText()">Download Text &nbsp;</button>
     </div>
   </div>
   <div class="written">

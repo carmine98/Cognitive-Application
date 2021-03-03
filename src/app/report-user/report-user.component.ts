@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {DataSource} from '@angular/cdk/collections';
 
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-report-user',
@@ -86,7 +86,7 @@ export class ReportUserComponent implements OnInit {
     this.http.get(`${this.userUrl}/downloadAudio/` + text, {
       responseType: 'arraybuffer'}).subscribe(response => {
       console.log(response);
-      this.downLoadFile(response, 'audio/wav');
+      this.downLoadFileAsAudio(response, 'audio/wav');
     }, error => {
       console.log(error);
       alert('Audio file not found');
@@ -98,7 +98,7 @@ export class ReportUserComponent implements OnInit {
     this.http.get(`${this.userUrl}/downloadText/` + text, {
       responseType: 'arraybuffer'}).subscribe(response => {
       console.log(response);
-      this.downLoadFile(response, 'text/txt');
+      this.downLoadFileAsTxt(response, 'text/txt');
     }, error => {
       console.log(error);
       alert('Text file not found');
@@ -110,14 +110,16 @@ export class ReportUserComponent implements OnInit {
    * @param data - Array Buffer data
    * @param type - type of the document.
    */
-  downLoadFile(data: any, type: string): void {
+  downLoadFileAsTxt(data: any, type: string): void {
     const blob = new Blob([data], { type});
-    const url = window.URL.createObjectURL(blob);
-    const pwa = window.open(url);
-    if (!pwa || pwa.closed || typeof pwa.closed === 'undefined') {
-      alert( 'Please disable your Pop-up blocker and try again.');
-    }
+    const filename = (document.getElementById('testID') as HTMLInputElement).value + '.txt';
+    saveAs(blob, filename);
   }
 
+  downLoadFileAsAudio(data: any, type: string): void {
+    const blob = new Blob([data], { type});
+    const filename = (document.getElementById('testID') as HTMLInputElement).value + '.wav';
+    saveAs(blob, filename);
+  }
 }
 
