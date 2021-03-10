@@ -73,7 +73,7 @@ export class ReportUserComponent implements OnInit {
         (document.getElementById('timeSY') as HTMLInputElement).value = this.dataSource.timeWritten;
         (document.getElementById('scoreSY') as HTMLInputElement).value = this.dataSource.score_test;
         (document.getElementById('timeANT') as HTMLInputElement).value = this.dataSource.RT_total;
-        (document.getElementById('scoreANT') as HTMLInputElement).value = this.dataSource.totalScore;
+        (document.getElementById('scoreANT') as HTMLInputElement).value = this.dataSource.rightAnswer;
       }
     }, error => {
       console.log(error);
@@ -105,6 +105,18 @@ export class ReportUserComponent implements OnInit {
     });
   }
 
+  downloadCSV(): void {
+    const text = (document.getElementById('testID') as HTMLInputElement).value;
+    this.http.get(`${this.userUrl}/downloadCSV/` + text, {
+      responseType: 'arraybuffer'}).subscribe(response => {
+      console.log(response);
+      this.downLoadFileAsCSV(response, 'text/csv');
+    }, error => {
+      console.log(error);
+      alert('CSV file not found');
+    });
+  }
+
   /**
    * Method is use to download file.
    * @param data - Array Buffer data
@@ -119,6 +131,12 @@ export class ReportUserComponent implements OnInit {
   downLoadFileAsAudio(data: any, type: string): void {
     const blob = new Blob([data], { type});
     const filename = (document.getElementById('testID') as HTMLInputElement).value + '.wav';
+    saveAs(blob, filename);
+  }
+
+  downLoadFileAsCSV(data: any, type: string): void {
+    const blob = new Blob([data], { type});
+    const filename = (document.getElementById('testID') as HTMLInputElement).value + '_TRIAL.csv';
     saveAs(blob, filename);
   }
 }

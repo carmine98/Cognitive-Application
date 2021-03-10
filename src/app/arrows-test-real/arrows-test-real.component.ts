@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class ArrowsTestRealComponent implements OnInit {
 
   a = [];
+  b = [];
   k!: number;
 
   interval!: any;
@@ -21,7 +22,6 @@ export class ArrowsTestRealComponent implements OnInit {
 
   time!: number;
   plus: boolean;
-  counterPlus!: number;
   button: boolean;
   answer!: number;
   userAnswer!: string;
@@ -36,10 +36,13 @@ export class ArrowsTestRealComponent implements OnInit {
   timeRightAnswer!: number;
   finalRightAnswer!: number;
 
+  sessionID!: number;
+  CSV!: any;
+
   constructor(private http: HttpClient, private router: Router) {
     this.cue1 = false;
     this.cue2 = false;
-    this.answer = 1.7;
+    this.answer = 1.5;
     this.plus = true;
     this.button = false;
 
@@ -52,34 +55,57 @@ export class ArrowsTestRealComponent implements OnInit {
 
     this.k = 0;
 
-    for (let i = 0; i < 96; i++) {
+    this.CSV = [];
+    const header = 'session_id;cue;coungruent_incongruent;left_right;;up_down;RT';
+    this.CSV.push(header);
+
+    for (let i = 0; i < 65; i++) {
       // @ts-ignore
       this.a[i] = i;
     }
+
+    for (let i = 0; i < 65; i++) {
+      // @ts-ignore
+      this.b[i] = i;
+    }
     // console.log(this.a);
     this.shuffle(this.a);
+    this.shuffle(this.b);
     // console.log(this.a);
-
   }
 
   ngOnInit(): void {
-    this.loop().then(() => {
-      const sequence = [];
-      this.id = sessionStorage.getItem('testIdentifier');
+    this.loop2().finally(() => {
+      this.loop().then(() => {
+        const sequence = [];
+        this.id = sessionStorage.getItem('testIdentifier');
 
-      this.finalRightAnswer = Number(this.finalRightAnswer.toFixed(3));
+        this.finalRightAnswer = Number(this.finalRightAnswer.toFixed(3));
 
-      sequence.push(this.id, this.finalRightAnswer, this.rightAnswer);
+        const path = 'Trial/' + this.id + 'Trial.csv';
+        sequence.push(this.id, this.finalRightAnswer, this.rightAnswer, this.wrongAnswer, path);
 
-      const prova = Object.assign({}, sequence);
-      console.log(prova);
-      const url = `${this.userUrl}/uploadArrowTest`;
-      this.http.post(url, prova).subscribe(response => {
-        console.log(response);
-      }, error => {
-        console.log(error);
+        const prova = Object.assign({}, sequence);
+        console.log(prova);
+        const url = `${this.userUrl}/uploadArrowTest`;
+        const url2 = `${this.userUrl}/uploadArrowTestCSV`;
+        // tslint:disable-next-line:variable-name
+        const CSV_final = this.exportToCsv('prova', this.CSV);
+        const fd = new FormData();
+        // @ts-ignore
+        fd.append('csv', CSV_final, this.id);
+        this.http.post(url2, fd).subscribe(response => {
+          console.log(response);
+        }, error => {
+          console.log(error);
+        });
+        this.http.post(url, prova).subscribe(response => {
+          console.log(response);
+        }, error => {
+          console.log(error);
+        });
+        this.router.navigateByUrl('/final');
       });
-      this.router.navigateByUrl('/final');
     });
   }
 
@@ -1976,17 +2002,24 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
-
+        this.counterRightAnswer = Number(this.counterRightAnswer.toFixed(3));
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2035,16 +2068,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2093,16 +2133,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2151,16 +2198,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2209,16 +2263,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2267,15 +2328,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -2325,15 +2390,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -2365,16 +2434,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2405,16 +2481,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2445,16 +2528,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2485,15 +2575,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -2525,15 +2619,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -2565,16 +2663,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2605,16 +2710,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2645,16 +2757,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2685,16 +2804,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2728,10 +2854,11 @@ export class ArrowsTestRealComponent implements OnInit {
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent); this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
         }else {
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -2763,15 +2890,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -2803,16 +2934,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2843,16 +2981,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2883,16 +3028,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2923,16 +3075,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2963,15 +3122,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3003,15 +3166,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3043,16 +3210,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3083,16 +3257,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3123,16 +3304,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3163,16 +3351,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3203,15 +3398,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3243,15 +3442,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3283,16 +3486,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3323,16 +3533,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3363,16 +3580,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3403,16 +3627,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3443,15 +3674,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3483,15 +3718,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3523,16 +3762,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3563,16 +3809,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3605,16 +3858,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3648,16 +3908,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3691,16 +3958,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3734,15 +4008,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3777,15 +4055,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3821,16 +4103,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3864,16 +4153,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3907,16 +4203,23 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        // tslint:disable-next-line:max-line-length
+        const trial = this.sessionID.toString() + ';'  + 'spatial cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
+        this.CSV.push(trial);
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3950,15 +4253,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -3993,15 +4300,19 @@ export class ArrowsTestRealComponent implements OnInit {
       // @ts-ignore
       if (this.counterAnswer < 0 ) {
         clearInterval(interval);
+        // tslint:disable-next-line:variable-name
+        let answer_trial = '';
         // tslint:disable-next-line:no-shadowed-variable
         if (this.userAnswer === congruent){
           // console.log(congruent);
           this.rightAnswer++;
-          this.counterRightAnswer = 1.7 - this.timeRightAnswer;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
           this.finalRightAnswer = this.finalRightAnswer + this.counterRightAnswer;
+          answer_trial = 'right';
         }else {
-          // console.log(congruent);
+          answer_trial = 'wrong';
           this.wrongAnswer++;
+          this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -4018,15 +4329,16 @@ export class ArrowsTestRealComponent implements OnInit {
   // tslint:disable-next-line:typedef
   async loop() {
     const items = this.a;
+    this.k = 0;
+    this.sessionID = 2;
     await new Promise(async (resolve, reject) => {
       try {
-        if (items.length === 0) { return resolve(); }
+        if (items.length === 0) { // @ts-ignore
+          return resolve(); }
         const funSync = async () => {
-          const r = this.getRandomTime(0.4, 1.6);
+          const r = this.getRandomTime(0.4, 1.2);
           console.log(items[this.k]);
           this.userAnswer = '';
-          this.counterRightAnswer = 0;
-          this.timeRightAnswer = 0;
           if (items[this.k] === 0 || items[this.k] === 1){
             this.startTimerCongruentLeftUp(r);
           }
@@ -4040,138 +4352,225 @@ export class ArrowsTestRealComponent implements OnInit {
             this.startTimerIncongruentRightUp(r);
           }
           if (items[this.k] === 8 || items[this.k] === 9){
-            this.startTimerNeutralLeftUp(r);
-          }
-          if (items[this.k] === 10 || items[this.k] === 11){
-            this.startTimerNeutralRightUp(r);
-          }
-          if (items[this.k] === 12 || items[this.k] === 13){
             this.startTimerCongruentLeftDown(r);
           }
-          if (items[this.k] === 14 || items[this.k] === 15){
+          if (items[this.k] === 10 || items[this.k] === 11){
             this.startTimerCongruentRightDown(r);
           }
-          if (items[this.k] === 16 || items[this.k] === 17){
+          if (items[this.k] === 12 || items[this.k] === 13){
             this.startTimerInCongruentLeftDown(r);
           }
-          if (items[this.k] === 18 || items[this.k] === 19){
+          if (items[this.k] === 14 || items[this.k] === 15){
             this.startTimerInCongruentRightDown(r);
           }
-          if (items[this.k] === 20 || items[this.k] === 21){
-            this.startTimerNeutralLeftDown(r);
-          }
-          if (items[this.k] === 22 || items[this.k] === 23){
-            this.startTimerNeutralRightDown(r);
-          }
-          if (items[this.k] === 24 || items[this.k] === 25){
+          if (items[this.k] === 16 || items[this.k] === 17){
             this.startTimerCentralCueCongruentLeftUp(r);
           }
-          if (items[this.k] === 26 || items[this.k] === 27){
+          if (items[this.k] === 18 || items[this.k] === 19){
             this.startTimerCentralCueCongruentRightUp(r);
           }
-          if (items[this.k] === 28 || items[this.k] === 29){
+          if (items[this.k] === 20 || items[this.k] === 21){
             this.startTimerCentralCueInCongruentLeftUp(r);
           }
-          if (items[this.k] === 30 || items[this.k] === 31){
+          if (items[this.k] === 22 || items[this.k] === 23){
             this.startTimerCentralCueInCongruentRightUp(r);
           }
-          if (items[this.k] === 32 || items[this.k] === 33){
-            this.startTimerCentralCueNeutralLeftUp(r);
-          }
-          if (items[this.k] === 34 || items[this.k] === 35){
-            this.startTimerCentralCueNeutralRightUp(r);
-          }
-          if (items[this.k] === 36 || items[this.k] === 37){
+          if (items[this.k] === 24 || items[this.k] === 25){
             this.startTimerCentralCueCongruentLeftDown(r);
           }
-          if (items[this.k] === 38 || items[this.k] === 39){
+          if (items[this.k] === 26 || items[this.k] === 27){
             this.startTimerCentralCueCongruentRightDown(r);
           }
-          if (items[this.k] === 40 || items[this.k] === 41){
+          if (items[this.k] === 28 || items[this.k] === 29){
             this.startTimerCentralCueInCongruentLeftDown(r);
           }
-          if (items[this.k] === 42 || items[this.k] === 43){
+          if (items[this.k] === 30 || items[this.k] === 31){
             this.startTimerCentralCueInCongruentRightDown(r);
           }
-          if (items[this.k] === 44 || items[this.k] === 45){
-            this.startTimerCentralCueNeutralLeftDown(r);
-          }
-          if (items[this.k] === 46 || items[this.k] === 47){
-            this.startTimerCentralCueNeutralRightDown(r);
-          }
-          if (items[this.k] === 48 || items[this.k] === 49){
+          if (items[this.k] === 32 || items[this.k] === 33){
             this.startTimerDoubleCueCongruentLeftUp(r);
           }
-          if (items[this.k] === 50 || items[this.k] === 51){
+          if (items[this.k] === 34 || items[this.k] === 35){
             this.startTimerDoubleCueCongruentRightUp(r);
           }
-          if (items[this.k] === 52 || items[this.k] === 53){
+          if (items[this.k] === 36 || items[this.k] === 37){
             this.startTimerDoubleCueInCongruentLeftUp(r);
           }
-          if (items[this.k] === 54 || items[this.k] === 55){
+          if (items[this.k] === 38 || items[this.k] === 39){
             this.startTimerDoubleCueInCongruentRightUp(r);
           }
-          if (items[this.k] === 56 || items[this.k] === 57){
-            this.startTimerDoubleCueNeutralLeftUp(r);
-          }
-          if (items[this.k] === 58 || items[this.k] === 59){
-            this.startTimerDoubleCueNeutralRightUp(r);
-          }
-          if (items[this.k] === 60 || items[this.k] === 61){
+          if (items[this.k] === 40 || items[this.k] === 41){
             this.startTimerDoubleCueCongruentLeftDown(r);
           }
-          if (items[this.k] === 62 || items[this.k] === 63){
+          if (items[this.k] === 42 || items[this.k] === 43){
             this.startTimerDoubleCueCongruentRightDown(r);
           }
-          if (items[this.k] === 64 || items[this.k] === 65){
+          if (items[this.k] === 44 || items[this.k] === 45){
             this.startTimerDoubleCueInCongruentLeftDown(r);
           }
-          if (items[this.k] === 66 || items[this.k] === 67){
+          if (items[this.k] === 46 || items[this.k] === 47){
             this.startTimerDoubleCueInCongruentRightDown(r);
           }
-          if (items[this.k] === 68 || items[this.k] === 69){
-            this.startTimerDoubleCueNeutralLeftDown(r);
-          }
-          if (items[this.k] === 70 || items[this.k] === 71){
-            this.startTimerDoubleCueNeutralRightDown(r);
-          }
-          if (items[this.k] === 72 || items[this.k] === 73){
+          if (items[this.k] === 48 || items[this.k] === 49){
             this.startTimerSpecialCueCongruentLeftUp(r);
           }
-          if (items[this.k] === 74 || items[this.k] === 75){
+          if (items[this.k] === 50 || items[this.k] === 51){
             this.startTimerSpecialCueCongruentRightDown(r);
           }
-          if (items[this.k] === 76 || items[this.k] === 77){
+          if (items[this.k] === 52 || items[this.k] === 53){
             this.startTimerSpecialCueInCongruentLeftUp(r);
           }
-          if (items[this.k] === 78 || items[this.k] === 79){
+          if (items[this.k] === 54 || items[this.k] === 55){
             this.startTimerSpecialCueIncongruentRightDown(r);
           }
-          if (items[this.k] === 80 || items[this.k] === 81){
-            this.startTimerSpecialCueNeutralLeftUp(r);
-          }
-          if (items[this.k] === 82 || items[this.k] === 83){
-            this.startTimerSpecialCueNeutralRightDown(r);
-          }
-          if (items[this.k] === 84 || items[this.k] === 85){
+          if (items[this.k] === 56 || items[this.k] === 57){
             this.startTimerSpecialCueCongruentLeftDown(r);
           }
-          if (items[this.k] === 86 || items[this.k] === 87){
+          if (items[this.k] === 58 || items[this.k] === 59){
             this.startTimerSpecialCueCongruentRightUp(r);
           }
-          if (items[this.k] === 88 || items[this.k] === 89){
+          if (items[this.k] === 60 || items[this.k] === 61){
             this.startTimerSpecialCueInCongruentLeftDown(r);
           }
-          if (items[this.k] === 90 || items[this.k] === 91){
+          if (items[this.k] === 62 || items[this.k] === 63){
             this.startTimerSpecialCueIncongruentRightUp(r);
           }
-          if (items[this.k] === 92 || items[this.k] === 93){
-            this.startTimerSpecialCueNeutralLeftDown(r);
+          if (this.k === items.length) {
+            // @ts-ignore
+            resolve();
+          } else {
+            const d = (r + this.answer) * 1000;
+            const d1 = (r + this.answer + 0.5) * 1000;
+            if (items[this.k] < 24){
+              await this.delay(d + 1000);
+            }else {
+              await this.delay(d1 + 1000);
+            }
+            console.log('Giusto ' + this.rightAnswer);
+            console.log('Sbagliato ' + this.wrongAnswer);
+            this.k++;
+            funSync();
           }
-          if (items[this.k] === 94 || items[this.k] === 95){
-            this.startTimerSpecialCueNeutralRightUp(r);
+        };
+        funSync();
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  async loop2() {
+    const items = this.b;
+    this.sessionID = 1;
+    await new Promise(async (resolve, reject) => {
+      try {
+        if (items.length === 0) { // @ts-ignore
+          return resolve(); }
+        const funSync = async () => {
+          const r = this.getRandomTime(0.4, 1.2);
+          console.log(items[this.k]);
+          this.userAnswer = '';
+          this.counterRightAnswer = 0;
+          this.timeRightAnswer = 0;
+          if (items[this.k] === 0 || items[this.k] === 1){ // ok
+            this.startTimerCongruentLeftUp(r);
+          }
+          if (items[this.k] === 2 || items[this.k] === 3){ // ok
+            this.startTimerCongruentRightUp(r);
+          }
+          if (items[this.k] === 4 || items[this.k] === 5){ // ok
+            this.startTimerIncongruentLeftUp(r);
+          }
+          if (items[this.k] === 6 || items[this.k] === 7){ // ok
+            this.startTimerIncongruentRightUp(r);
+          }
+          if (items[this.k] === 8 || items[this.k] === 9){ // ok
+            this.startTimerCongruentLeftDown(r);
+          }
+          if (items[this.k] === 10 || items[this.k] === 11){ // ok
+            this.startTimerCongruentRightDown(r);
+          }
+          if (items[this.k] === 12 || items[this.k] === 13){ // ok
+            this.startTimerInCongruentLeftDown(r);
+          }
+          if (items[this.k] === 14 || items[this.k] === 15){ // ok
+            this.startTimerInCongruentRightDown(r);
+          }
+          if (items[this.k] === 16 || items[this.k] === 17){ // ok
+            this.startTimerCentralCueCongruentLeftUp(r);
+          }
+          if (items[this.k] === 18 || items[this.k] === 19){ // ok
+            this.startTimerCentralCueCongruentRightUp(r);
+          }
+          if (items[this.k] === 20 || items[this.k] === 21){ // ok
+            this.startTimerCentralCueInCongruentLeftUp(r);
+          }
+          if (items[this.k] === 22 || items[this.k] === 23){ // ok
+            this.startTimerCentralCueInCongruentRightUp(r);
+          }
+          if (items[this.k] === 24 || items[this.k] === 25){ // ok
+            this.startTimerCentralCueCongruentLeftDown(r);
+          }
+          if (items[this.k] === 26 || items[this.k] === 27){ // ok
+            this.startTimerCentralCueCongruentRightDown(r);
+          }
+          if (items[this.k] === 28 || items[this.k] === 29){ // ok
+            this.startTimerCentralCueInCongruentLeftDown(r);
+          }
+          if (items[this.k] === 30 || items[this.k] === 31){ // ok
+            this.startTimerCentralCueInCongruentRightDown(r);
+          }
+          if (items[this.k] === 32 || items[this.k] === 33){ // ok
+            this.startTimerDoubleCueCongruentLeftUp(r);
+          }
+          if (items[this.k] === 34 || items[this.k] === 35){ // ok
+            this.startTimerDoubleCueCongruentRightUp(r);
+          }
+          if (items[this.k] === 36 || items[this.k] === 37){ // ok
+            this.startTimerDoubleCueInCongruentLeftUp(r);
+          }
+          if (items[this.k] === 38 || items[this.k] === 39){ // ok
+            this.startTimerDoubleCueInCongruentRightUp(r);
+          }
+          if (items[this.k] === 40 || items[this.k] === 41){ // ok
+            this.startTimerDoubleCueCongruentLeftDown(r);
+          }
+          if (items[this.k] === 42 || items[this.k] === 43){
+            this.startTimerDoubleCueCongruentRightDown(r);
+          }
+          if (items[this.k] === 44 || items[this.k] === 45){
+            this.startTimerDoubleCueInCongruentLeftDown(r);
+          }
+          if (items[this.k] === 46 || items[this.k] === 47){
+            this.startTimerDoubleCueInCongruentRightDown(r);
+          }
+          if (items[this.k] === 48 || items[this.k] === 49){
+            this.startTimerSpecialCueCongruentLeftUp(r);
+          }
+          if (items[this.k] === 50 || items[this.k] === 51){
+            this.startTimerSpecialCueCongruentRightDown(r);
+          }
+          if (items[this.k] === 52 || items[this.k] === 53){
+            this.startTimerSpecialCueInCongruentLeftUp(r);
+          }
+          if (items[this.k] === 54 || items[this.k] === 55){
+            this.startTimerSpecialCueIncongruentRightDown(r);
+          }
+          if (items[this.k] === 56 || items[this.k] === 57){
+            this.startTimerSpecialCueCongruentLeftDown(r);
+          }
+          if (items[this.k] === 58 || items[this.k] === 59){
+            this.startTimerSpecialCueCongruentRightUp(r);
+          }
+          if (items[this.k] === 60 || items[this.k] === 61){
+            this.startTimerSpecialCueInCongruentLeftDown(r);
+          }
+          if (items[this.k] === 62 || items[this.k] === 63){
+            this.startTimerSpecialCueIncongruentRightUp(r);
           }
           if (this.k === items.length) {
+            // @ts-ignore
             resolve();
           } else {
             const d = (r + this.answer) * 1000;
@@ -4197,6 +4596,24 @@ export class ArrowsTestRealComponent implements OnInit {
   // tslint:disable-next-line:typedef
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  // tslint:disable-next-line:typedef
+  exportToCsv(filename: string, rows: object[]): Blob {
+    if (!rows || !rows.length) {
+      // @ts-ignore
+      return;
+    }
+    const csvContent =
+      rows.map(row => {
+        // @ts-ignore
+        const cell = row === null || row === undefined ? '' : row;
+        console.log(row);
+        return cell;
+      }).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    return blob;
   }
 
 

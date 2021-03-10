@@ -64,6 +64,9 @@
     </div>
     <div style="text-align: left; margin-left: 5%; ">
       Score: <input class="inputBox" type="text" id="scoreANT" required>
+    </div><br>
+    <div style="text-align: center;">
+      <button mat-raised-button [disabled]="!buttonsDownload" (click)="downloadCSV()">Download Trial CSV</button>
     </div>
   </div>
 </div>

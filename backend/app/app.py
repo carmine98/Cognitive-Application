@@ -13,11 +13,13 @@ from pathlib import Path
 
 UPLOAD_FOLDER_AUDIO = 'BTACT/audio/'
 UPLOAD_FOLDER_TEXT = 'BTACT/text/'
+UPLOAD_FOLDER_TRIAL = 'Trial'
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_AUDIO
 app.config['UPLOAD_FOLDER_TEXT'] = UPLOAD_FOLDER_TEXT
+app.config['UPLOAD_FOLDER_TRIAL'] = UPLOAD_FOLDER_TRIAL
 cors = CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
 words = ['drum', 'curtain', 'bell', 'coffee', 'school', 'parent', 'moon', 'garden', 'hat', 'farmer', 'nose', 'turkey', 'color', 'house', 'river']
@@ -216,10 +218,32 @@ def upload_arrowtest():
         print(rt_total)
         totalScore = _json['2']
         print(totalScore)
-        sql = "INSERT INTO ARROW_TEST (testID, RT_total, totalScore) VALUES (%s, %s, %s)"
-        val = (testID, rt_total, totalScore)
+        totalScoreWring = _json['3']
+        print(totalScoreWring)
+        path_csv = _json['4']
+        sql = "INSERT INTO ARROW_TEST (testID, RT_total, rightAnswer, wrongAnswer, path_RT_CSV) VALUES (%s, %s, %s, %s, %s)"
+        val = (testID, rt_total, totalScore, totalScoreWring, path_csv)
         cursor.execute(sql, val)
         conn.commit()
+        resp = jsonify('Data received succesfull')
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/uploadArrowTestCSV', methods = ['GET', 'POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def upload_arrowtestCSV():
+    conn = db.get_connection()
+    cursor = conn.cursor()
+    try:
+        _json = request.get_json()
+        f = request.files['csv']
+        fname = f.filename + 'Trial.csv'
+        f.save(os.path.join(app.config['UPLOAD_FOLDER_TRIAL'], fname))
         resp = jsonify('Data received succesfull')
         resp.status_code = 200
         return resp
@@ -285,12 +309,12 @@ def download():
         output = io.StringIO()
         writer = csv.writer(output)
    
-        line = ['testID, name, surname, age, genre, path_audio, time_BTACT, path_text, score_BTACT, time_Arrow, score_Arrow, score_Symbol, time_Symbol']
+        line = ['testID; name; surname; age; genre; path_audio; time_BTACT; path_text; score_BTACT; time_Arrow; score_Arrow_right; score_Arrow_wrong; path_RT_CSV; score_Symbol; time_Symbol']
         writer.writerow(line)
  
         for row in result:
             print(row)
-            line = [row['testID'] + ';' + row['name'] + ';' + row['surname'] + ';' + str(row['age']) + ';' + row['genre'] + ';' + row['path_audio'] + ';' + str(row['time']) + ';' + row['path_text'] + ';' + str(row['score']) + ';' + str(row['RT_total']) + ';' + str(row['totalScore']) + ';' + str(row['score_test']) + ';' + str(row['timeWritten'])]
+            line = [row['testID'] + ';' + row['name'] + ';' + row['surname'] + ';' + str(row['age']) + ';' + row['genre'] + ';' + row['path_audio'] + ';' + str(row['time']) + ';' + row['path_text'] + ';' + str(row['score']) + ';' + str(row['RT_total']) + ';' + str(row['rightAnswer']) + ';' + str(row['wrongAnswer']) + ';' + row['path_RT_CSV'] + ';' + str(row['score_test']) + ';' + str(row['timeWritten'])]
             writer.writerow(line)
  
         output.seek(0)
@@ -348,6 +372,32 @@ def download_text(id):
     finally:
         cursor.close() 
         conn.close()      
+
+
+@app.route('/downloadCSV/<string:id>', methods = ['GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def download_CSV(id):
+    conn = db.get_connection()
+    cursor = conn.cursor(dictionary=True)
+    try:
+        testId = id
+        print(testId)
+        cursor.execute("SELECT path_RT_CSV FROM ARROW_TEST WHERE ARROW_TEST.testID = %s", (testId,))
+        result = cursor.fetchall()
+        print(result)
+        path = result[0]
+        final_path = path['path_RT_CSV']
+        print(final_path)
+        root = Path(__file__).parent.parent
+        csv_path = os.path.join(root, final_path)
+        print(csv_path)
+        return send_file(csv_path, mimetype="text/csv", as_attachment=True, attachment_filename='trial.csv')
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close() 
+        conn.close()      
+
 
 if __name__ == "__main__":
     app.run()
