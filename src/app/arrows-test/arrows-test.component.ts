@@ -66,7 +66,7 @@ export class ArrowsTestComponent implements OnInit {
 
   ngOnInit(): void {
     this.loop().then(() => {
-      this.router.navigateByUrl('/final');
+      this.router.navigateByUrl('/before');
     });
   }
 
