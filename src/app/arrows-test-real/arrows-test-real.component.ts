@@ -59,7 +59,7 @@ export class ArrowsTestRealComponent implements OnInit {
     this.k = 0;
 
     this.CSV = [];
-    const header = 'session_id;cue;coungruent_incongruent;left_right;up_down;RT';
+    const header = 'session_id;cue;coungruent_incongruent;left_right;up_down;RT;answer_trial';
     this.CSV.push(header);
 
     for (let i = 0; i < 65; i++) {
@@ -2025,6 +2025,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         this.counterRightAnswer = Number(this.counterRightAnswer.toFixed(3));
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -2091,6 +2094,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -2155,6 +2161,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -2221,6 +2230,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -2285,6 +2297,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -2351,6 +2366,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2413,6 +2431,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2456,6 +2477,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -2504,6 +2528,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -2550,6 +2577,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'no_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -2598,6 +2628,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2642,6 +2675,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2685,6 +2721,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -2733,6 +2772,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -2780,6 +2822,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -2826,6 +2871,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -2913,6 +2961,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -2956,6 +3007,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3004,6 +3058,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -3050,6 +3107,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3098,6 +3158,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'central_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -3145,6 +3208,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3189,6 +3255,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3232,6 +3301,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3280,6 +3352,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -3326,6 +3401,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3374,6 +3452,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -3421,6 +3502,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3465,6 +3549,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3508,6 +3595,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3556,6 +3646,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -3602,6 +3695,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3650,6 +3746,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'double_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -3697,6 +3796,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3741,6 +3843,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -3784,6 +3889,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3831,6 +3939,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'congruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3880,6 +3991,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -3931,6 +4045,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -3980,6 +4097,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -4031,6 +4151,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -4077,6 +4200,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
@@ -4125,6 +4251,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'congruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -4176,6 +4305,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'spatial_cue;' + 'incongruent;' + congruent + ';down;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
         this.CSV.push(trial);
@@ -4225,6 +4357,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:max-line-length
         const trial = this.sessionID.toString() + ';'  + 'spatial cue;' + 'incongruent;' + congruent + ';up;' + Number(this.counterRightAnswer.toFixed(3)).toString() + ';' + answer_trial;
@@ -4276,6 +4411,9 @@ export class ArrowsTestRealComponent implements OnInit {
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
         }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
+        }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
         img.src = '';
@@ -4322,6 +4460,9 @@ export class ArrowsTestRealComponent implements OnInit {
           answer_trial = 'wrong';
           this.wrongAnswer++;
           this.counterRightAnswer = 1.5 - this.timeRightAnswer;
+        }
+        if (this.userAnswer === ''){
+          answer_trial = 'time_is_up';
         }
         // tslint:disable-next-line:no-shadowed-variable
         const img = document.getElementById('arrow') as HTMLImageElement;
