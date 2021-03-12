@@ -1,0 +1,18 @@
+<h2 *ngIf="!isItalian" mat-dialog-title>You have finished the first session!</h2>
+<h2 *ngIf="isItalian" mat-dialog-title>Hai finito la prima sessione!</h2>
+
+<mat-dialog-content *ngIf="!isItalian">
+  <p>Click Play to start second session</p>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="isItalian">
+  <p>Premi Play per iniziare la seconda</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" *ngIf="!isItalian">&nbsp;
+  <button class="mat-raised-button" [mat-dialog-close]="true">Play</button>
+</mat-dialog-actions>
+
+<mat-dialog-actions align="end" *ngIf="isItalian">
+  <button class="mat-raised-button" [mat-dialog-close]="true">Play</button>
+</mat-dialog-actions>
