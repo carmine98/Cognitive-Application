@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
+import {DialogTestComponent} from '../dialog-test/dialog-test.component';
 
 @Component({
   selector: 'app-arrows-test-real',
@@ -39,7 +42,7 @@ export class ArrowsTestRealComponent implements OnInit {
   sessionID!: number;
   CSV!: any;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private matDialog: MatDialog) {
     this.cue1 = false;
     this.cue2 = false;
     this.answer = 1.5;
@@ -76,35 +79,41 @@ export class ArrowsTestRealComponent implements OnInit {
 
   ngOnInit(): void {
     this.loop2().finally(() => {
-      this.loop().then(() => {
-        const sequence = [];
-        this.id = sessionStorage.getItem('testIdentifier');
+      const dialogConfig = new MatDialogConfig();
+      const dialogRef = this.matDialog.open(DialogTestComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(value => {
+        if (value){
+          this.loop().then(() => {
+            const sequence = [];
+            this.id = sessionStorage.getItem('testIdentifier');
 
-        this.finalRightAnswer = Number(this.finalRightAnswer.toFixed(3));
+            this.finalRightAnswer = Number(this.finalRightAnswer.toFixed(3));
 
-        const path = 'Trial/' + this.id + 'Trial.csv';
-        sequence.push(this.id, this.finalRightAnswer, this.rightAnswer, this.wrongAnswer, path);
+            const path = 'Trial/' + this.id + 'Trial.csv';
+            sequence.push(this.id, this.finalRightAnswer, this.rightAnswer, this.wrongAnswer, path);
 
-        const prova = Object.assign({}, sequence);
-        console.log(prova);
-        const url = `${this.userUrl}/uploadArrowTest`;
-        const url2 = `${this.userUrl}/uploadArrowTestCSV`;
-        // tslint:disable-next-line:variable-name
-        const CSV_final = this.exportToCsv('prova', this.CSV);
-        const fd = new FormData();
-        // @ts-ignore
-        fd.append('csv', CSV_final, this.id);
-        this.http.post(url2, fd).subscribe(response => {
-          console.log(response);
-        }, error => {
-          console.log(error);
-        });
-        this.http.post(url, prova).subscribe(response => {
-          console.log(response);
-        }, error => {
-          console.log(error);
-        });
-        this.router.navigateByUrl('/final');
+            const prova = Object.assign({}, sequence);
+            console.log(prova);
+            const url = `${this.userUrl}/uploadArrowTest`;
+            const url2 = `${this.userUrl}/uploadArrowTestCSV`;
+            // tslint:disable-next-line:variable-name
+            const CSV_final = this.exportToCsv('prova', this.CSV);
+            const fd = new FormData();
+            // @ts-ignore
+            fd.append('csv', CSV_final, this.id);
+            this.http.post(url2, fd).subscribe(response => {
+              console.log(response);
+            }, error => {
+              console.log(error);
+            });
+            this.http.post(url, prova).subscribe(response => {
+              console.log(response);
+            }, error => {
+              console.log(error);
+            });
+            this.router.navigateByUrl('/final');
+          });
+        }
       });
     });
   }

@@ -36,6 +36,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 import {MatTableModule} from '@angular/material/table';
+import { DialogTestComponent } from './dialog-test/dialog-test.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {MatTableModule} from '@angular/material/table';
     AdminComponent,
     ReportUserComponent,
     InsertNewTestIDComponent,
+    DialogTestComponent,
   ],
   imports: [
     BrowserModule,

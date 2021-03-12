@@ -48,9 +48,14 @@ export class InsertNewTestIDComponent implements OnInit {
     this.http.post(url, prova).subscribe(response => {
       console.log(response);
       (document.getElementById('testID') as HTMLInputElement).value = '';
-      alert('Test ID added succesfuly');
+      alert('Test ID added successfully');
     }, error => {
       console.log(error);
+      if (error.statusText === 'INTERNAL SERVER ERROR'){
+        alert('Test ID is already inserted');
+      }else {
+        alert('Database Connection Error');
+      }
     });
   }
 

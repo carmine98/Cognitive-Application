@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-final-page',
@@ -10,7 +11,7 @@ export class FinalPageComponent implements OnInit {
   lang!: string | null;
   isItalian!: boolean;
 
-  constructor() {
+  constructor(private router: Router) {
     this.lang = sessionStorage.getItem('lang');
     if (this.lang === 'ita'){
       this.isItalian = true;
@@ -20,6 +21,10 @@ export class FinalPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  goToHome(): void{
+    this.router.navigateByUrl('');
   }
 
 }
