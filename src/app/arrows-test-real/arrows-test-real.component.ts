@@ -59,7 +59,7 @@ export class ArrowsTestRealComponent implements OnInit {
     this.k = 0;
 
     this.CSV = [];
-    const header = 'session_id;cue;coungruent_incongruent;left_right;;up_down;RT';
+    const header = 'session_id;cue;coungruent_incongruent;left_right;up_down;RT';
     this.CSV.push(header);
 
     for (let i = 0; i < 65; i++) {
