@@ -109,11 +109,15 @@ def upload_audio():
         f = request.files['audio_data']
         fname = f.filename + '_BTACT.wav'
         fname1 = f.filename + '_BTACT.txt'
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], fname))
+        root = Path(__file__).parent.parent
+        print(root)
+        final_audio_path = os.path.join(root, app.config['UPLOAD_FOLDER'])
+        print(os.path.join(final_audio_path, fname))
+        f.save(os.path.join(final_audio_path, fname))
         testID = f.filename
         f.flush()
         f.close()
-        with contextlib.closing(wave.open(UPLOAD_FOLDER_AUDIO + fname,'r')) as f:
+        with contextlib.closing(wave.open(os.path.join(final_audio_path, fname),'r')) as f:
             frames = f.getnframes()
             rate = f.getframerate()
             duration = frames / float(rate)
@@ -122,15 +126,16 @@ def upload_audio():
         conn = db.get_connection()
         cursor = conn.cursor()
         r = sr.Recognizer()
-        with sr.AudioFile(app.config['UPLOAD_FOLDER'] + fname) as source:
+        with sr.AudioFile(os.path.join(final_audio_path, fname)) as source:
             # listen for the data (load audio to memory)
             audio_data = r.record(source)
             text = r.recognize_google(audio_data)
-            outFile=open(UPLOAD_FOLDER_TEXT + fname1, "w")
+            final_text_path = os.path.join(root, app.config['UPLOAD_FOLDER_TEXT'])
+            outFile=open(os.path.join(final_text_path, fname1), "w")
             outFile.write(text)
             outFile.close()
             s=[]
-            with open(UPLOAD_FOLDER_TEXT + fname1, "r") as myfile:
+            with open(os.path.join(final_text_path, fname1), "r") as myfile:
                 content=myfile.read().split()
                 for word in content:
                     if((word in punctuation) or (word in whitespace)) :
@@ -294,8 +299,8 @@ def report():
     except Exception as e:
         print(e)
     finally:
-        cursor.close() 
-        conn.close() 
+        cursor.close()
+        conn.close()
 
 @app.route('/download', methods = ['POST', 'GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
@@ -308,23 +313,23 @@ def download():
 
         output = io.StringIO()
         writer = csv.writer(output)
-   
+
         line = ['testID; name; surname; age; genre; path_audio; time_BTACT; path_text; score_BTACT; time_Arrow; score_Arrow_right; score_Arrow_wrong; path_RT_CSV; score_Symbol; time_Symbol']
         writer.writerow(line)
- 
+
         for row in result:
             print(row)
             line = [row['testID'] + ';' + row['name'] + ';' + row['surname'] + ';' + str(row['age']) + ';' + row['genre'] + ';' + row['path_audio'] + ';' + str(row['time']) + ';' + row['path_text'] + ';' + str(row['score']) + ';' + str(row['RT_total']) + ';' + str(row['rightAnswer']) + ';' + str(row['wrongAnswer']) + ';' + row['path_RT_CSV'] + ';' + str(row['score_test']) + ';' + str(row['timeWritten'])]
             writer.writerow(line)
- 
+
         output.seek(0)
-   
+
         return Response(output, mimetype="text/csv", headers={"Content-Disposition":"attachment;filename=db.csv"})
     except Exception as e:
         print(e)
     finally:
-        cursor.close() 
-        conn.close()           
+        cursor.close()
+        conn.close()
 
 @app.route('/downloadAudio/<string:id>', methods = ['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
@@ -341,14 +346,15 @@ def download_audio(id):
         final_path = path['path_audio']
         print(final_path)
         root = Path(__file__).parent.parent
+        print(root)
         audio_path = os.path.join(root, final_path)
         print(audio_path)
         return send_file(audio_path, mimetype="audio/wav", as_attachment=True, attachment_filename='audio.wav')
     except Exception as e:
         print(e)
     finally:
-        cursor.close() 
-        conn.close()     
+        cursor.close()
+        conn.close()
 
 @app.route('/downloadText/<string:id>', methods = ['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
@@ -363,15 +369,20 @@ def download_text(id):
         print(result)
         path = result[0]
         final_path = path['path_text']
+        print("final_path")
         print(final_path)
-        output = open(final_path, "r")
+        root = Path(__file__).parent.parent
+        print(root)
+        text_path = os.path.join(root, final_path)
+        print(text_path)
+        output = open(text_path, "r")
         output.seek(0)
         return Response(output, mimetype="text/txt", headers={"Content-Disposition":"attachment;filename=text.txt"})
     except Exception as e:
         print(e)
     finally:
-        cursor.close() 
-        conn.close()      
+        cursor.close()
+        conn.close()
 
 
 @app.route('/downloadCSV/<string:id>', methods = ['GET'])
@@ -395,8 +406,8 @@ def download_CSV(id):
     except Exception as e:
         print(e)
     finally:
-        cursor.close() 
-        conn.close()      
+        cursor.close()
+        conn.close()
 
 
 if __name__ == "__main__":

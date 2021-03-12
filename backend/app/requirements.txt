@@ -5,3 +5,5 @@ PyMySQL
 flask-cors
 mysql-connector-python
 speechrecognition
+pathlib
+string
