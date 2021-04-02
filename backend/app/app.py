@@ -57,6 +57,7 @@ def add_user():
             conn.close()
 
 @app.route('/users')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def users():
     try:
         conn = db.get_connection()
@@ -314,12 +315,12 @@ def download():
         output = io.StringIO()
         writer = csv.writer(output)
 
-        line = ['testID; name; surname; age; genre; path_audio; time_BTACT; path_text; score_BTACT; time_Arrow; score_Arrow_right; score_Arrow_wrong; path_RT_CSV; score_Symbol; time_Symbol']
+        line = ['testID; age; genre; path_audio; time_BTACT; path_text; score_BTACT; time_Arrow; score_Arrow_right; score_Arrow_wrong; path_RT_CSV; score_Symbol; time_Symbol']
         writer.writerow(line)
 
         for row in result:
             print(row)
-            line = [row['testID'] + ';' + row['name'] + ';' + row['surname'] + ';' + str(row['age']) + ';' + row['genre'] + ';' + row['path_audio'] + ';' + str(row['time']) + ';' + row['path_text'] + ';' + str(row['score']) + ';' + str(row['RT_total']) + ';' + str(row['rightAnswer']) + ';' + str(row['wrongAnswer']) + ';' + row['path_RT_CSV'] + ';' + str(row['score_test']) + ';' + str(row['timeWritten'])]
+            line = [row['testID'] + ';' + str(row['age']) + ';' + row['genre'] + ';' + row['path_audio'] + ';' + str(row['time']) + ';' + row['path_text'] + ';' + str(row['score']) + ';' + str(row['RT_total']) + ';' + str(row['rightAnswer']) + ';' + str(row['wrongAnswer']) + ';' + row['path_RT_CSV'] + ';' + str(row['score_test']) + ';' + str(row['timeWritten'])]
             writer.writerow(line)
 
         output.seek(0)
@@ -407,6 +408,24 @@ def download_CSV(id):
         print(e)
     finally:
         cursor.close()
+        conn.close()
+
+
+@app.route('/password')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def password():
+    try:
+        conn = db.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM PASSWORD")
+        rows = cursor.fetchall()
+        resp = jsonify(rows)
+        resp.status_code = 200
+        cursor.close()
+        return resp
+    except Exception as e:
+        print(e)
+    finally:
         conn.close()
 
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {DialogBodyComponent} from '../dialog-body/dialog-body.component';
 import {DialogTestComponent} from '../dialog-test/dialog-test.component';
 
 @Component({

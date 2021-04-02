@@ -48,11 +48,6 @@ export class ReportUserComponent implements OnInit {
       console.log(response);
       if (response === null){
         this.buttonsDownload = false;
-        (document.getElementById('testID') as HTMLInputElement).value = '';
-        (document.getElementById('name') as HTMLInputElement).value = '';
-        (document.getElementById('surname') as HTMLInputElement).value = '';
-        (document.getElementById('age') as HTMLInputElement).value = '';
-        (document.getElementById('gender') as HTMLInputElement).value = '';
         (document.getElementById('timeBTACT') as HTMLInputElement).value = '';
         (document.getElementById('scoreBTACT') as HTMLInputElement).value = '';
         (document.getElementById('timeSY') as HTMLInputElement).value = '';
@@ -64,10 +59,6 @@ export class ReportUserComponent implements OnInit {
         this.dataSource = Object.assign({}, response);
         this.buttonsDownload = true;
         // (document.getElementById('testID') as HTMLInputElement).value = '';
-        (document.getElementById('name') as HTMLInputElement).value = this.dataSource.name;
-        (document.getElementById('surname') as HTMLInputElement).value = this.dataSource.surname;
-        (document.getElementById('age') as HTMLInputElement).value = this.dataSource.age;
-        (document.getElementById('gender') as HTMLInputElement).value = this.dataSource.genre;
         (document.getElementById('timeBTACT') as HTMLInputElement).value = this.dataSource.time;
         (document.getElementById('scoreBTACT') as HTMLInputElement).value = this.dataSource.score;
         (document.getElementById('timeSY') as HTMLInputElement).value = this.dataSource.timeWritten;
