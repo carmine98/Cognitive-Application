@@ -411,7 +411,7 @@ def download_CSV(id):
         conn.close()
 
 
-@app.route('/password')
+@app.route('/password', methods = ['POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def password():
     try:

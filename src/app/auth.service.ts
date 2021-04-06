@@ -28,8 +28,10 @@ export class AuthService {
   // tslint:disable-next-line:ban-types typedef
   async getPassword(){
     let data;
+    // tslint:disable-next-line:prefer-const
+    let test;
     const url = `${this.userUrl}/password`;
-    this.http.get(url).toPromise().then( response => {
+    this.http.post(url, test).toPromise().then( response => {
       data = Object.assign({}, response);
       // @ts-ignore
       this.realPassword = data[0].password;
