@@ -29,15 +29,10 @@ export class HomeComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  goToAdmin(){
+  async goToAdmin(){
     // tslint:disable-next-line:no-unused-expression
     const psswd = (document.getElementById('adminPassword') as HTMLInputElement).value;
-    if (this.authService.login(psswd)){
-      this.router.navigateByUrl('/admin');
-    }else {
-      (document.getElementById('adminPassword') as HTMLInputElement).value = '';
-      alert('wrong password');
-    }
+    this.authService.login(psswd);
   }
 
   // tslint:disable-next-line:typedef

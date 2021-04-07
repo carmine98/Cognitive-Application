@@ -411,18 +411,19 @@ def download_CSV(id):
         conn.close()
 
 
-@app.route('/password', methods = ['POST'])
+@app.route('/password/<string:psswd>', methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-def password():
+def password(psswd):
     try:
         conn = db.get_connection()
         cursor = conn.cursor(dictionary=True)
         cursor.execute("SELECT * FROM PASSWORD")
         rows = cursor.fetchall()
-        resp = jsonify(rows)
-        resp.status_code = 200
+        if rows[0]['password'] == psswd:
+            return Response("{'0':'1'}", status=200, mimetype='application/json')
+        else:
+            return Response("{'0':'1'}", status=405, mimetype='application/json')
         cursor.close()
-        return resp
     except Exception as e:
         print(e)
     finally:
